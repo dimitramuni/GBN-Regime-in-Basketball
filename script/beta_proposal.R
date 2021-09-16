@@ -3,7 +3,7 @@
 #k is maximum number of transitions
 k=2
 n=39
-current_betas=c(10,30)
+current_betas=c(1,39)
 propose_betas<-function(current_betas,n,k){ 
   
   for (j in 1:k) {
@@ -43,11 +43,13 @@ propose_betas<-function(current_betas,n,k){
       Z1=Z1+1-i+current_betas[j]+Kappa
     }
     Z=Z1+Z2 
-    
+    cat('\nZ:',Z)
+    cat('\n')
     #Probability of any of the proposed Betas; equaation 12
+    beta_values=c()
     prob1=c()
     for (i in lower_bound_beta_proposal:current_betas[j]) {
-      
+      beta_values=c(beta_values,i)
       prob1=c(prob1, (1+i-current_betas[j]+Kappa)/Z )
       
     }
@@ -55,12 +57,13 @@ propose_betas<-function(current_betas,n,k){
     
     prob2=c()
     for (i in current_betas[j]:upper_bound_beta_proposal){
-      
+      beta_values=c(beta_values,i)
       prob2=c(prob2, (1-i+current_betas[j]+Kappa)/Z ) 
       
     }
-    
-    cat('\nprobabilities',c(prob1,prob2) )
+    probabilities=c(prob1,prob2) 
+    df=data.frame(x=beta_values,y=probabilities)
+    print(df)
     
   }
   
