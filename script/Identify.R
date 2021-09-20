@@ -56,7 +56,7 @@ repeat{                  #L9
   #current subset of data #L18
   D_current=split_index(dataset,delta_current_nonzero_sorted)
   
-  #Structure learning using Hill Climbing Algorithm #L19 and L23 partly(adding the loglikelihood)
+  #Structure learning using Hill Climbing Algorithm #L19 and #L23 partly(adding the loglikelihood)
   n1=length(D_current)
   loglikelihood_D_current_nonzero_deltas=0
   for (i in 1:n1) {
@@ -143,13 +143,13 @@ repeat{                  #L9
     
   }
   
-    if(iteration > (n_iteration/2)){        #L39
+    if(iteration > (n_iteration/2)){       #L39
       index=iteration-(n_iteration/2)
       I[index,]=I_current                  #L40
-      Delta[index,]=delta_current             #L41 
+      Delta[index,]=delta_current          #L41 
     }
   
-  if(iteration==n_iteration){break}         #43
+  if(iteration==n_iteration){break}         #L43
 }
 
 ##Finding nonzero deltas #L45
