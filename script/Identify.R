@@ -96,27 +96,34 @@ repeat{                  #L9
   
   #Prior distribution for current beta varaibles
   U_distribution_current=uniform_distribution(betas = beta_current,n=n,k=k)
+  
   #Prior distribution for proposal Indicator variables 
   I_distribution_current= sum(dbern(x=I_current,prob=0.5,log = TRUE))
   
   #Prior distribution for proposal beta varaibles
   U_distribution_proposal=uniform_distribution(betas = beta_proposal,n=n,k=k)
+  
   #Prior distribution for proposal Indicator variables 
   I_distribution_proposal=sum(dbern(x=I_proposal,prob=0.5,log = TRUE))
   
   #adding logarithmic probability current distributions #L24
   log_posterior_D_current=loglikelihood_D_current_nonzero_deltas+U_distribution_current+I_distribution_current
   cat('\n p(posterior_current_beta_I|D)',log_posterior_D_current)
-  #adding logarithmic probability proposal distributions #L26
+ 
+   #adding logarithmic probability proposal distributions #L26
   log_posterior_D_proposal=loglikelihood_D_proposal_nonzero_deltas+ U_distribution_proposal+I_distribution_proposal
   cat('\n p(posterior_proposal_beta_I|D)',log_posterior_D_proposal)
+  
+  
   #Transition Probabilities Jp (log scale) #L28
   Jp=sum(log(beta_probabilities[c(beta_current),2]))
   cat('\nJp:',Jp)
-  #Transition Probabilities (log scale)Jc #L29
+  
+  #Transition Probabilities Jc (log scale) #L29
   Jc=sum(log(beta_probabilities[c(beta_proposal),2]))
   cat('\tJc:',Jc)
   cat('\n')
+  
   #Calculating r; #L31
   log_r= (log_posterior_D_proposal-log_posterior_D_current)+(Jc-Jp)
   
