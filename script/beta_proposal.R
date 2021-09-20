@@ -1,13 +1,15 @@
 #Beta Proposal Values using equation 7 to 11
 
 #k is maximum number of transitions
-k=2
-n=39
-current_betas=c(1,39)
+#k=2
+#n=39
+#current_betas=c(1,39)
+
+
 propose_betas<-function(current_betas,n,k){ 
-  
+
   #empty data frame to keep track of beta proposal and their correspoding probability
-  beta_probabilities=data.frame()
+  beta_probabilities<<-data.frame(x=integer(),y=double())
   
   #looping over k transition 
   for (j in 1:k) {
@@ -90,17 +92,23 @@ propose_betas<-function(current_betas,n,k){
     
     ###################################################################################################
     
+    #new vector to keep track of probabilities
     probabilities=c(prob1,prob2) 
     
-    
+    #creating a data frame, where column x is position, column y is corresponding probability
     df=data.frame(x=c(beta_values1,beta_values2),y=probabilities)
     
-    beta_probabilities=rbind(beta_probabilities,df)    
+    #binding df for each k iteration 
+    beta_probabilities<<-rbind(beta_probabilities,df)    
     
 
   }
 
- plot(x=beta_probabilities$x,y=beta_probabilities$y)  
+ #Plotting the distribution  
+ plot(x=beta_probabilities$x,
+      y=beta_probabilities$y,xlab = expression(paste('Proposal ',beta[i],'*')),
+      ylab=expression(paste("Conditional Probability p( ",
+                            beta[i],"*|",beta[i],")")))  
  
  #sorting betas according to corresponding probability
  beta_sorted=order(beta_probabilities$y,decreasing = T)
@@ -108,10 +116,10 @@ propose_betas<-function(current_betas,n,k){
  beta_indicies=beta_sorted[1:k]
  #assigning first k beta proposal after sorting according to probability
  beta_proposed=beta_probabilities$x[beta_indicies]
-return(beta_indicies)
+return(beta_proposed)
 }
-#propose_betas(current_betas=c(10,30),n,k)
+#propose_betas(current_betas=c(10,30),n=39,k=2)
 #propose_betas(current_betas=c(1,39),n,k)
 #propose_betas(current_betas=c(15,25),n,k)
 #propose_betas(current_betas=c(19,21),n,k)
-propose_betas(current_betas=c(10,20,30),n,k=3)
+#propose_betas(current_betas=c(10,20,30),n,k=3)

@@ -8,13 +8,13 @@ require(bnlearn)
 require(Rlab)
 dataset=asia
 n=dim(dataset)[1]
-
+set.seed(1728)
 #n=1000 #number of data points (L2)
-k=3 #maximum number of transition
-n_iteration=10 # number of MCMC iterations
+k=8 #maximum number of transition
+n_iteration=20 # number of MCMC iterations
 
 beta_current=numeric(length=k)# container for current Betas
-beta_current=(1:k)*n/(k+1) #spacing out Beta evenly (L3)
+beta_current=round((1:k)*n/(k+1)) #spacing out Beta evenly (L3)
 
 #Current indicator variable is set to 1 intially for all the splits
 I_current= rep(1,k) #current indicator variable (L4)
@@ -25,14 +25,15 @@ delta_current=beta_current*I_current# mulitplying beta_i * indicator_i (L5)
 
 iteration=0 # (L6) for consistency with algorithm
 
-# Matrix container for posterior samples
-I=matrix(NA,nrow=n_iteration,ncol=k) # current Indicator (L7)
-Delta=matrix(NA,nrow=n_iteration,ncol=k) #current Delta (L8)
+# Dataframe container for posterior samples
+I=data.frame(matrix(ncol =k,nrow = (n_iteration/10)) ) # current Indicator (L7)
+Delta=data.frame(matrix(ncol =k,nrow = (n_iteration/10) )) #current Delta (L8)
 
 repeat{                  #L9
   
   iteration=iteration+1  #L10
   
+  beta_probabilities<<-data.frame(x=integer(),y=double())
   #propose new betas, eq:7 to 11  #L11
   beta_proposal= propose_betas(beta_current,n,k)
 
@@ -96,20 +97,73 @@ repeat{                  #L9
   #Prior distribution for current beta varaibles
   U_distribution_current=uniform_distribution(betas = beta_current,n=n,k=k)
   #Prior distribution for proposal Indicator variables 
-  I_distribution_current= dbern(x=beta_current,prob=0.5,log = TRUE)
+  I_distribution_current= sum(dbern(x=I_current,prob=0.5,log = TRUE))
   
   #Prior distribution for proposal beta varaibles
   U_distribution_proposal=uniform_distribution(betas = beta_proposal,n=n,k=k)
   #Prior distribution for proposal Indicator variables 
-  I_distribution_proposal=dbern(x=beta_proposal,prob=0.5,log = TRUE)
+  I_distribution_proposal=sum(dbern(x=I_proposal,prob=0.5,log = TRUE))
   
   #adding logarithmic probability current distributions #L24
   log_posterior_D_current=loglikelihood_D_current_nonzero_deltas+U_distribution_current+I_distribution_current
-  
+  cat('\n p(posterior_current_beta_I|D)',log_posterior_D_current)
   #adding logarithmic probability proposal distributions #L26
   log_posterior_D_proposal=loglikelihood_D_proposal_nonzero_deltas+ U_distribution_proposal+I_distribution_proposal
+  cat('\n p(posterior_proposal_beta_I|D)',log_posterior_D_proposal)
+  #Transition Probabilities Jp (log scale) #L28
+  Jp=sum(log(beta_probabilities[c(beta_current),2]))
+  cat('\nJp:',Jp)
+  #Transition Probabilities (log scale)Jc #L29
+  Jc=sum(log(beta_probabilities[c(beta_proposal),2]))
+  cat('\tJc:',Jc)
+  cat('\n')
+  #Calculating r; #L31
+  log_r= (log_posterior_D_proposal-log_posterior_D_current)+(Jc-Jp)
   
+  #converting into decimal scale
+  r=exp(log_r)
+    
+  
+  #a random sample from uniform distribution from 0 to 1 #L32
+  u=runif(1,min = 0,max=1)
+    
+  #Acceptance Ratio
+  #Accept or Reject?  #L33
+  if(r>u){
+    beta_current=beta_proposal              #L34
+    I_current=I_proposal                    #L35
+    delta_current=beta_current*I_current    #L36 
+    
   }
+  
+    if(iteration > (n_iteration/2)){        #L39
+      index=iteration-(n_iteration/2)
+      I[index,]=I_current                  #L40
+      Delta[index,]=delta_current             #L41 
+    }
+  
+  if(iteration==n_iteration){break}         #43
+}
 
+##Finding nonzero deltas #L45
 
+#Marginal mean of each indicator variable
+I_mean=colMeans(I)
+#Converting the marginal mean to binary 1/0
+I_Binary=ifelse(I_mean>0.5,1,0)
 
+#Marginal mean of each Delta variable
+Delta_mean=colMeans(Delta)
+#Rounding the Delta values as it is a position
+Delta_mean_integer=round(Delta_mean)
+
+#Idenfying delta values based on binary Indicator 
+Deltas_tentative=Delta_mean_integer*I_Binary
+#selecting nonzero delta values 
+NonZero_Deltas=subset(Deltas_tentative,Deltas_tentative>0)
+
+#Finding unique non-zero positions 
+Unique_NonZero_Deltas=unique(NonZero_Deltas)
+#sorting the unique non-zero positions in ascending ordre
+Unique_Sorted_NonZero_Deltas=sort(Unique_NonZero_Deltas,decreasing = FALSE)
+Unique_Sorted_NonZero_Deltas
