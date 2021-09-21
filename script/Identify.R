@@ -1,5 +1,5 @@
 ## Identifyinig regime change in the data set
-## Based on work the by Bendtsen M. (2017), https://link.springer.com/article/10.1007/s10618-017-0510-5
+## Based on work by Bendtsen M. (2017), https://link.springer.com/article/10.1007/s10618-017-0510-5
 setwd("~/Desktop/GBN-Regime-in-Basketball/script")
 source('uniform_distribution.R')
 source('beta_proposal.R')

@@ -1,5 +1,5 @@
 ## Mergining Regimes identified by nonzero delts in the data set
-## Based on work the by Bendtsen M. (2017), https://link.springer.com/article/10.1007/s10618-017-0510-5
+## Based on work  by Bendtsen M. (2017), https://link.springer.com/article/10.1007/s10618-017-0510-5
 ## See Appendix A.2
 source('Collapse.R')
 nonzero_delta_from_Identify<-Unique_Sorted_NonZero_Deltas
@@ -16,10 +16,12 @@ C<-numeric(length =length(R))
 f_ColumnName<-function(i){return(paste0('C',i))}
 #using sapply to call the function above
 C_ColumnName<-sapply(X=1:length(R),FUN=f_ColumnName)
+
+
+#first regime has 2 as the child regime and last regime does not have any child regime
+C=as.list(c(2:length(R),NA))
 #assigning column names to vector positions of C
 names(C)<-C_ColumnName
-#first regime has 2 as the child regime and last regime does not have any child regime
-C<-c(2:length(R),NA)
 
 #container for all possible structuers #L7
 RC<-list(R,C)
