@@ -6,12 +6,30 @@ source('beta_proposal.R')
 require(textshape)
 require(bnlearn)
 require(Rlab)
+
+
+#n=1000 #number of data points (L2)
+#k=8 #maximum number of transition
+#n_iteration=200 # number of MCMC iterations
+
+Loglikelihood_Calculation<-function(dataset){
+  
+  #Learning Bayesian Network using Hill Climbing Algorithm
+  bn<-hc(dataset,score = 'bde')
+  #Bayesian Dirichilet score
+  BDE_score<-score(bn, dataset, type = "bde")
+  return(BDE_score)
+}
+
+
+
+Identify_Positions<-function(k,n_iteration){
+
+
 dataset=asia
 n=dim(dataset)[1]
 set.seed(1728)
-#n=1000 #number of data points (L2)
-k=8 #maximum number of transition
-n_iteration=20 # number of MCMC iterations
+
 
 beta_current=numeric(length=k)# container for current Betas
 beta_current=round((1:k)*n/(k+1)) #spacing out Beta evenly (L3)
@@ -26,8 +44,8 @@ delta_current=beta_current*I_current# mulitplying beta_i * indicator_i (L5)
 iteration=0 # (L6) for consistency with algorithm
 
 # Dataframe container for posterior samples
-I=data.frame(matrix(ncol =k,nrow = (n_iteration/10)) ) # current Indicator (L7)
-Delta=data.frame(matrix(ncol =k,nrow = (n_iteration/10) )) #current Delta (L8)
+I=data.frame(matrix(ncol =k,nrow = (n_iteration/2)) ) # current Indicator (L7)
+Delta=data.frame(matrix(ncol =k,nrow = (n_iteration/2) )) #current Delta (L8)
 
 repeat{                  #L9
   
@@ -56,21 +74,21 @@ repeat{                  #L9
   #current subset of data #L18
   D_current=split_index(dataset,delta_current_nonzero_sorted)
   
+
   #Structure learning using Hill Climbing Algorithm #L19 and #L23 partly(adding the loglikelihood)
-  n1=length(D_current)
-  loglikelihood_D_current_nonzero_deltas=0
-  for (i in 1:n1) {
+  #n1=length(D_current)
+  
+  loglikelihood_D_current_nonzero_deltas=sum(sapply(D_current,Loglikelihood_Calculation))
+ 
+  #for (i in 1:n1) {
     
-    #ignoring the subset which has upto 30 data points (could be tuned later on)
-    if(dim(D_current[[i]])[1]>0.30){
       #structure learning for subset i of D_proposal dataset
-      bn<-hc(D_current[[i]],score = 'bde')
+ #     bn<-hc(D_current[[i]],score = 'bde')
       #bayesian dirichlet score #23
-      loglikelihood_D_current_nonzero_deltas=
-        loglikelihood_D_current_nonzero_deltas+ score(bn, D_current[[i]], type = "bde")
-    }
+#      loglikelihood_D_current_nonzero_deltas=
+ #       loglikelihood_D_current_nonzero_deltas+ score(bn, D_current[[i]], type = "bde")
     
-  }
+#  }
   
   
   
@@ -78,21 +96,18 @@ repeat{                  #L9
   D_proposal=split_index(dataset,delta_proposal_nonzero_sorted)
   
   #Structure learning using Hill Climbing Algorithm #L21 and L25 partly (adding the loglikelihood)
-  n2=length(D_proposal)
-  loglikelihood_D_proposal_nonzero_deltas=0
-  for (i in 1:n2) {
+  #n2=length(D_proposal)
+  loglikelihood_D_proposal_nonzero_deltas=sum(sapply(D_proposal,Loglikelihood_Calculation))
+#  for (i in 1:n2) {
     
-    #ignoring the subset which has upto 30 data points (could be tuned later on)
-    if(dim(D_proposal[[i]])[1]>0.30){
       
       #structure learning for subset i of D_proposal dataset
-      bn<-hc(D_proposal[[i]],score = 'bde')
+#      bn<-hc(D_proposal[[i]],score = 'bde')
       #bayesian dirichlet score #L25
-      loglikelihood_D_proposal_nonzero_deltas=
-        loglikelihood_D_proposal_nonzero_deltas+ score(bn, D_proposal[[i]], type = "bde")
-    }
+#      loglikelihood_D_proposal_nonzero_deltas=
+#        loglikelihood_D_proposal_nonzero_deltas+ score(bn, D_proposal[[i]], type = "bde")
     
-  }
+#  }
   
   #Prior distribution for current beta varaibles
   U_distribution_current=uniform_distribution(betas = beta_current,n=n,k=k)
@@ -108,21 +123,21 @@ repeat{                  #L9
   
   #adding logarithmic probability current distributions #L24
   log_posterior_D_current=loglikelihood_D_current_nonzero_deltas+U_distribution_current+I_distribution_current
-  cat('\n p(posterior_current_beta_I|D)',log_posterior_D_current)
+  #cat('\n p(posterior_current_beta_I|D)',log_posterior_D_current)
  
    #adding logarithmic probability proposal distributions #L26
   log_posterior_D_proposal=loglikelihood_D_proposal_nonzero_deltas+ U_distribution_proposal+I_distribution_proposal
-  cat('\n p(posterior_proposal_beta_I|D)',log_posterior_D_proposal)
+  #cat('\n p(posterior_proposal_beta_I|D)',log_posterior_D_proposal)
   
   
   #Transition Probabilities Jp (log scale) #L28
   Jp=sum(log(beta_probabilities[c(beta_current),2]))
-  cat('\nJp:',Jp)
+  #cat('\nJp:',Jp)
   
   #Transition Probabilities Jc (log scale) #L29
   Jc=sum(log(beta_probabilities[c(beta_proposal),2]))
-  cat('\tJc:',Jc)
-  cat('\n')
+  #cat('\tJc:',Jc)
+  #cat('\n')
   
   #Calculating r; #L31
   log_r= (log_posterior_D_proposal-log_posterior_D_current)+(Jc-Jp)
@@ -173,4 +188,5 @@ NonZero_Deltas=subset(Deltas_tentative,Deltas_tentative>0)
 Unique_NonZero_Deltas=unique(NonZero_Deltas)
 #sorting the unique non-zero positions in ascending ordre
 Unique_Sorted_NonZero_Deltas=sort(Unique_NonZero_Deltas,decreasing = FALSE)
-Unique_Sorted_NonZero_Deltas
+return(Unique_Sorted_NonZero_Deltas)
+}

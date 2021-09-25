@@ -2,29 +2,29 @@
 #This script consist of a helper function used in Collapse.R
 
 #Function combines subsets
-Combine_Regime_Child<-function(R,C,i,j){
+CRC<-function(R,C,i,j){
   
   R_new<-R    #L26
-   
+  
   R_new[[i]]=rbind(R_new[[i]],R_new[[j]]) #L27
   
   R_new=R_new[-j] #L28 removing regime j from Rnew and reindexed automatically
-
+  
   C_new<-C  #L30
   
   cat('\nL:16, C_new')
   print(C_new)
   #L31, regime j's children will be added to regime i's
   #If C_new[[j]] has a child (which is not NA) then append C_new[[j]]-1 with C_new[[i]]
-
+  
   if(!is.na(C_new[[j]])){# check if C_new[[j]] has any child
     
     C_new[[i]]<-c(C_new[[i]],C_new[[j]]) # here -1 is to account for reindexing
     
-    }
+  }
   cat('\nL:25C_new ')
   print(C_new)
-   
+  
   
   iteration=(1:length(C_new))[-i]
   for (k in iteration) { #L32
@@ -39,20 +39,20 @@ Combine_Regime_Child<-function(R,C,i,j){
       print(C_new)  
     } #L37
   }
-    C_new<-C_new[-j] #L38removing component j from C_nrew 
-    #reindexing 
-#    if(j<=length(C_new)){
-#    for (ind in j:length(C_new)) {
-#      C_new[[ind]]<- C_new[[ind]]-1
-      
-#             }
-#     }
-    cat('\nL38C_new')
-    print(C_new)
-  RnewCnew= list(R_new,C_new) #L39
-    
+  C_new<-C_new[-j] #L38removing component j from C_nrew 
+  #reindexing 
+  #    if(j<=length(C_new)){
+  #    for (ind in j:length(C_new)) {
+  #      C_new[[ind]]<- C_new[[ind]]-1
   
-
+  #             }
+  #     }
+  cat('\nL38C_new')
+  print(C_new)
+  RnewCnew= list(R_new,C_new) #L39
+  
+  
+  
   
   return(RnewCnew)   
   

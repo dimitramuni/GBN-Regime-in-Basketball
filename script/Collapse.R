@@ -16,10 +16,12 @@ Collapse_Regime_Child<-function(R,C,RC){
         
         #function call to Combine.R
         #returns new R and C
+        cat('\ni= ',i, 'j= ', j)
         RnewCnew=Combine_Regime_Child(R,C,i,j) #L17
-        
+        Rnew=RnewCnew[[1]]
+        Cnew=RnewCnew[[2]]
         #appending the new R and C to existing list #L18
-        RC=list(RC,Rnew,Cnew)
+        RC=list(RC,RnewCnew)
         
         #Recursion #L19
         Collapse_Regime_Child(Rnew,Cnew,RC)

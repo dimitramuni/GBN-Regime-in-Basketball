@@ -21,7 +21,7 @@ C_ColumnName<-sapply(X=1:length(R),FUN=f_ColumnName)
 #first regime has 2 as the child regime and last regime does not have any child regime
 C=as.list(c(2:length(R),NA))
 #assigning column names to vector positions of C
-#names(C)<-C_ColumnName
+names(C)<-C_ColumnName
 
 #container for all possible structuers #L7
 RC<-list(R,C)
@@ -32,7 +32,8 @@ RC_new=Collapse_Regime_Child(R,C,RC)
 
 #Finding R and C which maximise the posterior distribution #L9
 #structure learning for each (R,C) pair
-for (index in 1:len(RC_new[[1]]) ) {
+bn_score=c()
+for (index in 1:length(RC_new[[1]]) ) {
   
   
   bn<-hc(RC_new[[1]][[index]],score = 'bde')
