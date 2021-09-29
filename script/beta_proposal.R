@@ -105,10 +105,10 @@ propose_betas<-function(current_betas,n,k){
   }
 
  #Plotting the distribution  
-# plot(x=beta_probabilities$x,
-#      y=beta_probabilities$y,xlab = expression(paste('Proposal ',beta[i],'*')),
-#      ylab=expression(paste("Conditional Probability p( ",
-#                            beta[i],"*|",beta[i],")")))  
+ plot(x=beta_probabilities$x,
+      y=beta_probabilities$y,xlab = expression(paste('Proposal ',beta[i],'*')),
+      ylab=expression(paste("Conditional Probability p( ",
+                            beta[i],"*|",beta[i],")")))  
  
  #sorting betas according to corresponding probability
  beta_sorted=order(beta_probabilities$y,decreasing = T)
@@ -116,6 +116,7 @@ propose_betas<-function(current_betas,n,k){
  beta_indicies=beta_sorted[1:k]
  #assigning first k beta proposal after sorting according to probability
  beta_proposed=beta_probabilities$x[beta_indicies]
+
 return(beta_proposed)
 }
 #propose_betas(current_betas=c(10,30),n=39,k=2)

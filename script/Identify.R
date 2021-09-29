@@ -16,7 +16,7 @@ Loglikelihood_Calculation<-function(dataset){
   
   #Learning Bayesian Network using Hill Climbing Algorithm
   bn<-hc(dataset,score = 'bde')
-  #Bayesian Dirichilet score
+  #Bayesian Dirichilet Equivalent score
   BDE_score<-score(bn, dataset, type = "bde")
   return(BDE_score)
 }
@@ -131,11 +131,15 @@ repeat{                  #L9
   
   
   #Transition Probabilities Jp (log scale) #L28
-  Jp=sum(log(beta_probabilities[c(beta_current),2]))
+  #Jp=sum(log(beta_probabilities[c(beta_current),2]))
+  Jp=sum(log(.subset2(beta_probabilities,2)[beta_current]))
   #cat('\nJp:',Jp)
+
+  
   
   #Transition Probabilities Jc (log scale) #L29
-  Jc=sum(log(beta_probabilities[c(beta_proposal),2]))
+  #Jc=sum(log(beta_probabilities[c(beta_proposal),2]))
+  Jc=sum(log(.subset2(beta_probabilities,2)[beta_proposal]))
   #cat('\tJc:',Jc)
   #cat('\n')
   
@@ -186,7 +190,7 @@ NonZero_Deltas=subset(Deltas_tentative,Deltas_tentative>0)
 
 #Finding unique non-zero positions 
 Unique_NonZero_Deltas=unique(NonZero_Deltas)
-#sorting the unique non-zero positions in ascending ordre
+#sorting the unique non-zero positions in ascending order
 Unique_Sorted_NonZero_Deltas=sort(Unique_NonZero_Deltas,decreasing = FALSE)
 return(Unique_Sorted_NonZero_Deltas)
 }
