@@ -1,42 +1,59 @@
 # Based on work by Bendtsen M. (2017), https://link.springer.com/article/10.1007/s10618-017-0510-5
 # Helper function for Construct.R
 
-Loglikelihood_GBN<-function(dataset,bn){
+LL_GBN<-function(dataset,bn){
   
-  #Learning Bayesian Network using Hill Climbing Algorithm
-  #bn<-hc(dataset,score = 'bde')
   #Bayesian Dirichilet Equivalent score
   BDE_score<-score(bn, dataset, type = "bde")
   return(BDE_score)
 }
 
 
-
-
-#Accuracy_GBN<-function(GBN,resamples,R,tau,theta){
+Accuracy_GBN<-function(GBN,resamples,R,tau,theta){
   
+  #counter to keep track of how many times the log ratio has been calculated
+  n_ratio=0
   accuracies<-c() #container for accuracy #L28
   
-  for (regime in 1:length(resampled_regime)){
+  for (regime in 1:length(resampled_regime)){   #L29
     
-    n<-dim(resampled_regime[[regime]])[1] # number of observation in the regime
-   
-    
-    #bn_active<-as.grain(bn.fit(GBN[[1]])) #activated BN from GBN
-    
-    for(t in 1:n){
+    n<-dim(resampled_regime[[regime]])[1] # number of observation in the regime #L30
+
+    for(t in 1:n){          #
       
-      if(t> (tau-1)){
-        
-        resampled_regime[[regime]][1:t,]
-        
-        
-        
-      }
+        if(t> (tau-1)){
+          
+
+          
+          #Parent BN
+          PBN<-GBN[[regime]]
+          
+          #Child BN
+          CBN<-GBN[[C[[regime]]]]
+          
+          # if there is no child BN for a particular BN stop
+          if(is.null(CBN)) {break}
+          
+          #subset data to be used for Ratio test
+          subset_data=resampled_regime[[regime]][1:t,]
+          
+          Log_Ratio=LL_GBN(subset_data,CBN) - LL_GBN(subset_data,PBN)
+          
+          #log ratio calculation increment
+          n_ratio=n_ratio+1
+          
+          #testing if active BN is GBN corresponds to true regime according to R
+          accuracies<-c(accuracies,ifelse(Log_Ratio>log(theta),0,1)) 
+          
+              
+                      }
       
-    }
+                }
     
     
     } 
   
-#}
+final_accuracy<-sum(accuracies)/n_ratio  
+
+  return(final_accuracy)  #L41
+} #L42

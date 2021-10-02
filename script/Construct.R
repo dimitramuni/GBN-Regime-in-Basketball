@@ -54,20 +54,36 @@ for (iteration in 1:nResample) {    #L10
   
   
 }       #L12
-Lambda<-list() #Container for parameteres #L14
+Lambda<-matrix(nrow = nBayesOptimiseIteration,ncol=2) #Container for parameteres #L14
 f<-c() #Container for accuracies #L15
 #################################GP############################################
 
 for (iteration in 1:nBayesOptimiseIteration){
   
-  accuracy<- ACCURACY_GBN(GBN,resampled_regime,R,tau,theta) #L17
+  accuracy<- Accuracy_GBN(GBN,resampled_regime,R,tau,theta) #L17
 
-  Lambda[[iteration]]=c(tau,theta)                          #L18
+  Lambda[iteration,]=c(tau,theta)                          #L18
    
   f<-c(f,accuracy)                                          #L19
   
+  SEkernel<-rbfdot(sigma = 0.5)
   #Update tau and theta using GP
+  iteration=1
+  x=matrix(Lambda[1:iteration,],byrow=T,nrow=1,ncol=2)
+  #x=(x-mean(x))/sd(x)
+  xstar=as.matrix.data.frame(expand.grid(x=seq(0,25,length.out = 10),y=seq(0,1.5,length.out =10 )))
+  #xstar=x
+  xstar<-as.matrix(t(xstar[24,])) 
+  Kss<-kernelMatrix(kernel = SEkernel,x=xstar,y=xstar)
+  Kxs<-kernelMatrix(kernel = SEkernel,x=x,y=xstar)
+  Kxx<-kernelMatrix(kernel = SEkernel,x=x,y=x)
   
+  #sigma_g(tau_i,theta_i)
+  #mu_g(tau_i,theta_i)
+  MeanVec<- t(Kxs)%*%solve(Kxx)*f
+  CovMat<- Kss - t(Kxs)%*%solve(Kxx,Kxs)
+  
+  rmvnorm(1,mean=t(MeanVec),sigma = CovMat)
 }
 
 #parametrising GBN with Lambda pair for which accuracy is the greatest
