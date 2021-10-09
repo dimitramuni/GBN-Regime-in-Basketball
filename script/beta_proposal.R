@@ -120,7 +120,7 @@ propose_betas<-function(current_betas,n,k){
 return(beta_proposed)
 }
 #propose_betas(current_betas=c(10,30),n=39,k=2)
-#propose_betas(current_betas=c(1,39),n,k)
-#propose_betas(current_betas=c(15,25),n,k)
-#propose_betas(current_betas=c(19,21),n,k)
-#propose_betas(current_betas=c(10,20,30),n,k=3)
+#propose_betas(current_betas=c(1,39),n=39,k=2)
+#propose_betas(current_betas=c(15,25),n=39,k=2)
+#propose_betas(current_betas=c(19,21),n=39,k=2)
+propose_betas(current_betas=c(10,200,399),n=500,k=3)

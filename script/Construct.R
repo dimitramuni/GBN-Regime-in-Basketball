@@ -71,19 +71,24 @@ for (iteration in 1:nBayesOptimiseIteration){
   iteration=1
   x=matrix(Lambda[1:iteration,],byrow=T,nrow=1,ncol=2)
   #x=(x-mean(x))/sd(x)
-  xstar=as.matrix.data.frame(expand.grid(x=seq(0,25,length.out = 10),y=seq(0,1.5,length.out =10 )))
+  #xstar=as.matrix.data.frame(expand.grid(x=seq(0,25,length.out = 10),y=seq(0,1.5,length.out =10 )))
   #xstar=x
   xstar<-as.matrix(t(xstar[24,])) 
-  Kss<-kernelMatrix(kernel = SEkernel,x=xstar,y=xstar)
-  Kxs<-kernelMatrix(kernel = SEkernel,x=x,y=xstar)
-  Kxx<-kernelMatrix(kernel = SEkernel,x=x,y=x)
+
+
+  K<-matrix(c(SEkernel(c(1,2),c(1,2)),
+              SEkernel(c(1,2),c(3,4)),
+              SEkernel(c(3,4),c(1,2)),
+              SEkernel(c(3,4),c(3,4))),nrow=2)
   
+  Ks<-matrix(c(SEkernel(c(3,4),c(1,2)),SEkernel(c(3,4),c(3,4))),nrow=1)
+  Kss<-SEkernel(c(3,4),c(3,4))
   #sigma_g(tau_i,theta_i)
   #mu_g(tau_i,theta_i)
-  MeanVec<- t(Kxs)%*%solve(Kxx)*f
-  CovMat<- Kss - t(Kxs)%*%solve(Kxx,Kxs)
+  MeanVec<- Ks%*%solve(K)*f
+  CovMat<- Kss - t(Ks)%*%solve(K,Ks)
   
-  rmvnorm(1,mean=t(MeanVec),sigma = CovMat)
+  rmvnorm(1,mean=MeanVec,sigma = CovMat)
 }
 
 #parametrising GBN with Lambda pair for which accuracy is the greatest
