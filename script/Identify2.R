@@ -6,8 +6,8 @@ source('beta_proposal.R')
 require(textshape)
 require(bnlearn)
 require(Rlab)
-
-
+require(parallel)
+cores<-detectCores()
 #n=1000 #number of data points (L2)
 #k=8 #maximum number of transition
 #n_iteration=200 # number of MCMC iterations
