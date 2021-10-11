@@ -16,4 +16,4 @@ Data courtesy of **Sports Reference LLC** under creative commons licence, [Baske
 
 
 # Reference:
-1. Marcus Bendtsen. [“Regimes in baseball players’ career data.”](https://link.springer.com/content/pdf/10.1007/s10618-017-0510-5.pdf) In:Data Mining  Knowledge Discovery 31.6 (2017), pp. 1580–1621.ISSN:13845810.
+1. Marcus Bendtsen. [“Regimes in baseball players’ career data.”](https://link.springer.com/article/10.1007/s10618-017-0510-5) In: Data Mining  Knowledge Discovery 31.6 (2017), pp. 1580–1621.ISSN:13845810.
