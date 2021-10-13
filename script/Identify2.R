@@ -1,13 +1,16 @@
-## Identifyinig regime change in the data set
+## Identifyinig regime change in the data set using Rcpp implmentation
 ## Based on work by Bendtsen M. (2017), https://link.springer.com/article/10.1007/s10618-017-0510-5
 setwd("~/Desktop/GBN-Regime-in-Basketball/script")
-source('uniform_distribution.R')
-source('beta_proposal.R')
+#source('uniform_distribution.R')
+#source('beta_proposal.R')
 require(textshape)
 require(bnlearn)
 require(Rlab)
-require(parallel)
-cores<-detectCores()
+require(Rcpp)
+require(RcppArmadillo)
+Rcpp::sourceCpp('uniform_distribution.cpp')
+Rcpp::sourceCpp('beta_proposal.cpp')
+
 #n=1000 #number of data points (L2)
 #k=8 #maximum number of transition
 #n_iteration=200 # number of MCMC iterations
@@ -16,7 +19,7 @@ Loglikelihood_Calculation<-function(dataset){
   
   #Learning Bayesian Network using Hill Climbing Algorithm
   bn<-hc(dataset,score = 'bde')
-  #Bayesian Dirichilet score
+  #Bayesian Dirichilet Equivalent score
   BDE_score<-score(bn, dataset, type = "bde")
   return(BDE_score)
 }
@@ -51,10 +54,16 @@ Identify_Positions2<-function(k,n_iteration){
     
     iteration=iteration+1  #L10
     
-    beta_probabilities<<-data.frame(x=integer(),y=double())
-    #propose new betas, eq:7 to 11  #L11
-    beta_proposal= propose_betas(beta_current,n,k)
     
+    #propose new betas, eq:7 to 11  #L11
+    #beta_proposal_matrix= propose_betas(beta_current,n,k) // R implmentation 
+    beta_proposal_matrix=beta_proposal_cpp(n=n,k=k,current_betas=beta_current) # Rcpp Implmentation
+    
+    beta_probabilities<-data.frame(x=beta_proposal_matrix[,1],y=beta_proposal_matrix[,2])
+    
+    beta_proposed=sample(x=beta_proposal_matrix[,1],size = k,prob = beta_proposal_matrix[,2])
+    beta_proposed_sorted=sort(beta_proposed,decreasing = F)
+    beta_proposal=beta_proposed_sorted
     
     #proposing indicator variable  #L12 (Bernoulli Distribution; p=0.5)
     I_proposal=rbinom(n=k,size=1,prob=0.5)
@@ -110,13 +119,13 @@ Identify_Positions2<-function(k,n_iteration){
     #  }
     
     #Prior distribution for current beta varaibles
-    U_distribution_current=uniform_distribution(betas = beta_current,n=n,k=k)
+    U_distribution_current=uniform_distributioncpp(betas = beta_current,n=n,k=k)
     
     #Prior distribution for proposal Indicator variables 
     I_distribution_current= sum(dbern(x=I_current,prob=0.5,log = TRUE))
     
     #Prior distribution for proposal beta varaibles
-    U_distribution_proposal=uniform_distribution(betas = beta_proposal,n=n,k=k)
+    U_distribution_proposal=uniform_distributioncpp(betas = beta_proposal,n=n,k=k)
     
     #Prior distribution for proposal Indicator variables 
     I_distribution_proposal=sum(dbern(x=I_proposal,prob=0.5,log = TRUE))
@@ -131,15 +140,23 @@ Identify_Positions2<-function(k,n_iteration){
     
     
     #Transition Probabilities Jp (log scale) #L28
-    Jp=sum(log(beta_probabilities[c(beta_current),2]))
-    #Jp=sum(log(.subset2(beta_probabilities,2)[beta_current]))
+     
+    Jp=sum(log(beta_probabilities[c(beta_probabilities$x %in% beta_current),2]))
+    
+    #Jp=sum(log(.subset2(beta_probabilities,2)[beta_probabilities$x %in% beta_current]))
     #cat('\nJp:',Jp)
     
     
     
     #Transition Probabilities Jc (log scale) #L29
-    Jc=sum(log(beta_probabilities[c(beta_proposal),2]))
-    #Jc=sum(log(.subset2(beta_probabilities,2)[beta_proposal]))
+    Jc=sum(log(beta_probabilities[c(beta_probabilities$x %in% beta_proposal),2]))
+    #Jc=sum(log(.subset2(beta_probabilities,2)[beta_probabilities$x %in% beta_proposal]))
+    if(is.na(Jc)){
+      print(beta_proposed)
+      print(beta_proposal)
+      temp_df<<-data.frame()
+      temp_df<<-beta_probabilities
+      print(beta_probabilities)}
     #cat('\tJc:',Jc)
     #cat('\n')
     
@@ -153,6 +170,7 @@ Identify_Positions2<-function(k,n_iteration){
     #a random sample from uniform distribution from 0 to 1 #L32
     u=runif(1,min = 0,max=1)
     
+    #cat('\n log_r ',log_r,'\t r',r )
     #Acceptance Ratio
     #Accept or Reject?  #L33
     if(r>u){

@@ -59,7 +59,7 @@ propose_betas<-function(current_betas,n,k){
       }
     }
     Z=Z1+Z2 
-    cat('\nZ:',Z)
+    #cat('\nZ:',Z)
     #cat('\n')
     ###################################################################################################
     #Probability of any of the proposed Betas; equaation 12
@@ -67,7 +67,7 @@ propose_betas<-function(current_betas,n,k){
     prob1=c()
     
     if(current_betas[j]>=lower_bound_beta_proposal){
-      cat('\nlength1 :',length(lower_bound_beta_proposal:current_betas[j]) )
+      #cat('\nlength1 :',length(lower_bound_beta_proposal:current_betas[j]) )
       for (i in lower_bound_beta_proposal:current_betas[j]) {
         #cat('\n i=',i)
         beta_values1=c(beta_values1,i)
@@ -82,7 +82,7 @@ propose_betas<-function(current_betas,n,k){
     beta_values2=c()
     #cat('\n -----')
     if(upper_bound_beta_proposal>=(current_betas[j]+1)){
-      cat('\nlength2 :',length((current_betas[j]+1):upper_bound_beta_proposal))
+      #cat('\nlength2 :',length((current_betas[j]+1):upper_bound_beta_proposal))
       for (i in (current_betas[j]+1):upper_bound_beta_proposal){
         #cat('\n i=',i)
         beta_values2=c(beta_values2,i)

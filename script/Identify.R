@@ -135,15 +135,15 @@ repeat{                  #L9
   
   
   #Transition Probabilities Jp (log scale) #L28
-  #Jp=sum(log(beta_probabilities[c(beta_current),2]))
-  Jp=sum(log(.subset2(beta_probabilities,2)[beta_current]))
+  #Jp=sum(log(beta_probabilities[c(beta_probabilities$x %in% beta_current),2]))
+  Jp=sum(log(.subset2(beta_probabilities,2)[beta_probabilities$x %in% beta_current]))
   #cat('\nJp:',Jp)
 
   
   
   #Transition Probabilities Jc (log scale) #L29
-  #Jc=sum(log(beta_probabilities[c(beta_proposal),2]))
-  Jc=sum(log(.subset2(beta_probabilities,2)[beta_proposal]))
+  #Jc=sum(log(beta_probabilities[c(beta_probabilities$x %in% beta_proposal),2]))
+  Jc=sum(log(.subset2(beta_probabilities,2)[beta_probabilities$x %in% beta_proposal]))
   #cat('\tJc:',Jc)
   #cat('\n')
   

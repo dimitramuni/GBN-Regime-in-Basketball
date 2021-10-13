@@ -2,13 +2,14 @@
 using namespace Rcpp;
 // [[Rcpp::export]]
 
-
 NumericMatrix beta_proposal_cpp(int n, int k, NumericVector current_betas) {
   NumericMatrix probmat(n-k+1, 2);
   double Kappa=0,upper_bound_beta_proposal=0,lower_bound_beta_proposal=0;
   double Z1=0,Z2=0,Z=0;
   double index=0;
   for(int j=0;j < k; j++){
+    // ###################################################################################################
+   //Lower Bound for Beta proposal;equation 7
     
 
     if(j==0){
@@ -20,7 +21,8 @@ NumericMatrix beta_proposal_cpp(int n, int k, NumericVector current_betas) {
       lower_bound_beta_proposal= current_betas[j]-floor(beta_temp_difference1) +1;
     }
   
-
+    //###################################################################################################
+    //#Upper Bound for Beta proposal;equation 8
   
     if(j== (k-1)){
       upper_bound_beta_proposal=n;
@@ -31,6 +33,8 @@ NumericMatrix beta_proposal_cpp(int n, int k, NumericVector current_betas) {
     upper_bound_beta_proposal= current_betas[j]+floor(beta_temp_difference2)-1;
       }
 
+    //###################################################################################################
+    //#Kappa; equation 9
 
   double t1=current_betas[j]-lower_bound_beta_proposal;
   double t2=upper_bound_beta_proposal-current_betas[j];
@@ -43,6 +47,8 @@ NumericMatrix beta_proposal_cpp(int n, int k, NumericVector current_betas) {
     Kappa=t2;
   }
   
+    //###################################################################################################
+    //Normalising constant; equation 11
   Z1=0;
   if(current_betas[j]>=lower_bound_beta_proposal){
     
@@ -61,7 +67,9 @@ NumericMatrix beta_proposal_cpp(int n, int k, NumericVector current_betas) {
     }
     Z=Z1+Z2 ;
     
-    
+    //###################################################################################################
+    //#Probability of any of the proposed Betas; equaation 12
+  
     
     if(current_betas[j]>=lower_bound_beta_proposal){
       
@@ -95,10 +103,4 @@ NumericMatrix beta_proposal_cpp(int n, int k, NumericVector current_betas) {
     
   return(probmat);
 }
-
-
-
-/*** R
-beta_proposal_cpp(n=39,k=2,current_betas=c(15,25))
-*/
 
