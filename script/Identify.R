@@ -6,7 +6,8 @@ source('beta_proposal.R')
 require(textshape)
 require(bnlearn)
 require(Rlab)
-
+require(Rcpp)
+require(RcppArmadillo)
 
 #n=1000 #number of data points (L2)
 #k=8 #maximum number of transition
@@ -53,8 +54,11 @@ repeat{                  #L9
   
   beta_probabilities<<-data.frame(x=integer(),y=double())
   #propose new betas, eq:7 to 11  #L11
-  beta_proposal= propose_betas(beta_current,n,k)
-
+  beta_proposal_matrix= propose_betas(beta_current,n,k)
+  
+  beta_proposed=sample(x=beta_proposal_matrix[,1],size = k,prob = beta_proposal_matrix[,2])
+  beta_proposed_sorted=sort(beta_proposed,decreasing = F)
+  beta_proposal=beta_proposed_sorted
   
   #proposing indicator variable  #L12 (Bernoulli Distribution; p=0.5)
   I_proposal=rbinom(n=k,size=1,prob=0.5)

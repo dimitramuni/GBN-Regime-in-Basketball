@@ -15,5 +15,5 @@ In a dynamic sport of professional basketball, a team may encounter several tang
 Data courtesy of **Sports Reference LLC** under creative commons licence, [Basketball-Reference.com](https://www.basketball-reference.com/) -Basketball Statistics and History. 
 
 
-# Reference:
+# References :
 1. Marcus Bendtsen. [“Regimes in baseball players’ career data.”](https://link.springer.com/article/10.1007/s10618-017-0510-5) In: Data Mining  Knowledge Discovery 31.6 (2017), pp. 1580–1621.ISSN:13845810.

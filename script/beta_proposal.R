@@ -59,7 +59,7 @@ propose_betas<-function(current_betas,n,k){
       }
     }
     Z=Z1+Z2 
-    #cat('\nZ:',Z)
+    cat('\nZ:',Z)
     #cat('\n')
     ###################################################################################################
     #Probability of any of the proposed Betas; equaation 12
@@ -67,7 +67,7 @@ propose_betas<-function(current_betas,n,k){
     prob1=c()
     
     if(current_betas[j]>=lower_bound_beta_proposal){
-    
+      cat('\nlength1 :',length(lower_bound_beta_proposal:current_betas[j]) )
       for (i in lower_bound_beta_proposal:current_betas[j]) {
         #cat('\n i=',i)
         beta_values1=c(beta_values1,i)
@@ -82,6 +82,7 @@ propose_betas<-function(current_betas,n,k){
     beta_values2=c()
     #cat('\n -----')
     if(upper_bound_beta_proposal>=(current_betas[j]+1)){
+      cat('\nlength2 :',length((current_betas[j]+1):upper_bound_beta_proposal))
       for (i in (current_betas[j]+1):upper_bound_beta_proposal){
         #cat('\n i=',i)
         beta_values2=c(beta_values2,i)
@@ -105,22 +106,25 @@ propose_betas<-function(current_betas,n,k){
   }
 
  #Plotting the distribution  
- plot(x=beta_probabilities$x,
-      y=beta_probabilities$y,xlab = expression(paste('Proposal ',beta[i],'*')),
-      ylab=expression(paste("Conditional Probability p( ",
-                            beta[i],"*|",beta[i],")")))  
+#plot(x=beta_probabilities$x,
+#     y=beta_probabilities$y,xlab = expression(paste('Proposal ',beta[i],'*')),
+#     ylab=expression(paste("Conditional Probability p( ",
+#                           beta[i],"*|",beta[i],")")))  
  
+ #print(beta_probabilities)
  #sorting betas according to corresponding probability
- beta_sorted=order(beta_probabilities$y,decreasing = T)
+ #beta_sorted=order(beta_probabilities$y,decreasing = T)
  #selecting first k indicies for selecting beta
- beta_indicies=beta_sorted[1:k]
+ #beta_indicies=beta_sorted[1:k]
  #assigning first k beta proposal after sorting according to probability
- beta_proposed=beta_probabilities$x[beta_indicies]
-
-return(beta_proposed)
+ #beta_proposed=beta_probabilities$x[beta_indicies]
+ #beta_proposed=sample(x=beta_probabilities$x,size = k,prob = beta_probabilities$y)
+ #beta_proposed_sorted=sort(beta_proposed,decreasing = F)
+return(beta_probabilities)
 }
 #propose_betas(current_betas=c(10,30),n=39,k=2)
 #propose_betas(current_betas=c(1,39),n=39,k=2)
-#propose_betas(current_betas=c(15,25),n=39,k=2)
+propose_betas(current_betas=c(15,25),n=39,k=2)
 #propose_betas(current_betas=c(19,21),n=39,k=2)
-propose_betas(current_betas=c(10,200,399),n=500,k=3)
+#propose_betas(current_betas=c(10,20,40,50),n=60,k=2)
+#n-k+1 possible betas
