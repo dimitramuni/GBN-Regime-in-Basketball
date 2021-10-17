@@ -26,15 +26,19 @@ Collapse_Regime_Child<-function(R,C,RC){
         print(!(j %in% C[[i]]))
         print(!(i%in%C[[j]]))
         cat('\n Inside if, i= ',i, 'j= ', j)
-        RnewCnew=Combine_Regime_Child(R,C,i,j) #L17
+        RnewCnew=Combine_Regime_Child5(R,C,i,j) #L17
         Rnew=RnewCnew[[1]]
         Cnew=RnewCnew[[2]]
+        
+  
+        
+    
         #appending the new R and C to existing list #L18
         #RC<<-c(RC,RnewCnew)
         #Cn<<-list(Cn,Cnew)
         #print(RC)
         #Recursion #L19
-        
+      
         Cn[[length(Cn)+1]]<<-Cnew
         Rn[[length(Rn)+1]]<<-Rnew
         cat('\n before recursion')

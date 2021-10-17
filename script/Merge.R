@@ -37,16 +37,14 @@ Rn<<-list(R)
 Collapse_Regime_Child(R,C,RC)
 
 delete_indicies=c()
-for (i in 1:(length(Cn)-1)) {
-  for(j in (i+1):(length(Cn))){
-    
-    suppressWarnings(if(all.equal(Cn[[i]],Cn[[j]])==TRUE){delete_indicies=c(delete_indicies,j);
-    cat('\ni:',i,'j:',j)})
-    
-  }
+for (i in 1:(length(Cn))) {
+  
+  if(1 %in% Cn[[i]][[1]]){delete_indicies=c(delete_indicies,i)}
+  if(2 %in% Cn[[i]][[2]]){delete_indicies=c(delete_indicies,i)}
+
 }
-#Cn<<-Cn[-delete_ind]
-#Rn<<-Rn[-delete_ind]
+Cn<<-Cn[-c(unique(delete_indicies))]
+Rn<<-Rn[-c(unique(delete_indicies)) ]
 #Finding R and C which maximise the posterior distribution #L9
 #structure learning for each (R,C) pair
 

@@ -96,8 +96,10 @@ Combine_Regime_Child5<-function(R,C,i,j){
     
   }
   
-  print(C_new)
   
+  
+  print(C_new)
+   
   RnewCnew= list(R_new,C_new) #L39
   return(RnewCnew)   
   

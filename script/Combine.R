@@ -81,7 +81,7 @@ Combine_Regime_Child<-function(R,C,i,j){
   
 
   
-  #return(RnewCnew)   
+  return(RnewCnew)   
   
 }
 
