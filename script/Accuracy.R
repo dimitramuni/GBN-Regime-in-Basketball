@@ -29,7 +29,7 @@ Accuracy_GBN<-function(GBN,resamples,R,tau,theta){
           PBN<-GBN[[regime]]
           
           #Child BN
-          CBN<-GBN[[C[[regime]]]]
+          CBN<-GBN[[Cn[[3]][[regime]]]]
           
           # if there is no child BN for a particular BN stop
           if(is.null(CBN)) {break}

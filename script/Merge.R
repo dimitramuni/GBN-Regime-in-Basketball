@@ -6,7 +6,7 @@ source('Collapse.R')
 require(textshape)
 require(bnlearn)
 require(Rlab)
-Unique_Sorted_NonZero_Deltas<-c(500,2500,3100,4200)
+Unique_Sorted_NonZero_Deltas<-c(500,2500,4200)
 nonzero_delta_from_Identify<-Unique_Sorted_NonZero_Deltas
 
 #Merge Function #L1
