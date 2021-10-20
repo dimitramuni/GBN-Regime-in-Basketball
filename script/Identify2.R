@@ -12,7 +12,7 @@ Rcpp::sourceCpp('uniform_distribution.cpp')
 Rcpp::sourceCpp('beta_proposal.cpp')
 
 #n=1000 #number of data points (L2)
-#k=8 #maximum number of transition
+#k=4 #maximum number of transition
 #n_iteration=200 # number of MCMC iterations
 
 Loglikelihood_Calculation<-function(dataset){
@@ -20,18 +20,18 @@ Loglikelihood_Calculation<-function(dataset){
   #Learning Bayesian Network using Hill Climbing Algorithm
   bn<-hc(dataset,score = 'bde')
   #Bayesian Dirichilet Equivalent score
-  BDE_score<-score(bn, dataset, type = "bde")
+  BDE_score<-bnlearn::score(bn, dataset, type = "bde")
   return(BDE_score)
 }
 
 
 
-Identify_Positions2<-function(k,n_iteration){
+Identify_Positions2<-function(data,k,n_iteration){
   
-  
-  dataset=asia
+  data=gamelog_discrete
+  dataset=data
   n=dim(dataset)[1]
-  set.seed(1728)
+  #set.seed(1728)
   
   
   beta_current=numeric(length=k)# container for current Betas
