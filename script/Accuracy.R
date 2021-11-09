@@ -4,7 +4,7 @@
 LL_GBN<-function(dataset,bn){
   
   #Bayesian Dirichilet Equivalent score
-  BDE_score<-score(bn, dataset, type = "bde")
+  BDE_score<-bnlearn::score(bn, dataset, type = "bde")
   return(BDE_score)
 }
 

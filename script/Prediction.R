@@ -1,4 +1,4 @@
-'Structure Learning for Portland Trail Blazers gamelogs, seasons: from 11980-81 to 2020-21
+'Structure Learning for Chicago Bulls gamelogs,seasons: from 11980-81 to 2020-21
 
 
 Bayesian Network for Basketball Analytics
@@ -15,9 +15,10 @@ library(snow)
 library(tidyverse)
 
 #merging basic and advanced stat
+
 setwd("~/Desktop/GBN-Regime-in-Basketball/data")
 
-basic=read.csv('Portland_basic_gamelog_8081_2021.csv')
+basic=read.csv('Chicago_basic_gamelog_8081_2021.csv')
 colnames(basic)<-c('Date','Sep','Opp','WL','TmScore','OppScore',
                    'TmFG','TmFGA','TmFGper','Tm3P','Tm3PA','Tm3Pper','TmFT','TmFTA','TmFTper',
                    'TmORB','TmTRB','TmAST','TmSTL','TmBLK','TmTOV','TmPF',
@@ -25,41 +26,34 @@ colnames(basic)<-c('Date','Sep','Opp','WL','TmScore','OppScore',
                    'OppORB','OppTRB','OppAST','OppSTL','OppBLK','OppTOV','OppPF')
 
 
-advanced=read.csv('Portland_advanced_gamelog_8081_2021.csv')
+advanced=read.csv('Chicago_advanced_gamelog_8081_2021.csv')
 colnames(advanced)<-c('Date','Sep','Opp','WL','TmScore','OppScore',
                       'ORtg','DRtg','Pace','FTr','3PAr','TSper','TRBper','ASTper','STLper','BLKper',
                       'OffeFGper','OffTOVper','OffDRBper','OffFT/FGA',
                       'DefeFGper','DefTOVper','DefDRBper','DefFT/FGA')
-portland_gamelog=merge(basic,advanced,by = c('Date','Sep','Opp','WL','TmScore','OppScore'))
+chicago_gamelog=merge(basic,advanced,by = c('Date','Sep','Opp','WL','TmScore','OppScore'))
 
 #Experiment I
+setwd("~/Desktop/GBN-Regime-in-Basketball/script")
 
 'Modeling BN using four factors (offensive and defensive),Game Outcome, Opponent'
 
 ## Pre-processing 
-
-dataset1=subset(portland_gamelog,select=c('Date','Opp','WL','OffeFGper','OffTOVper','OffDRBper','OffFT/FGA',
-                                         'DefeFGper','DefTOVper','DefDRBper','DefFT/FGA'))
+##the last regime identified by "2016-12-16"
 
 #omiting the rows with missing values,https://statisticsglobe.com/r-remove-data-frame-rows-with-some-or-all-na
 
-gamelog_stat<-dataset1 %>% drop_na()
+chicago_stat<-chicago_gamelog %>% drop_na()
+nObs<-nrow(chicago_stat)
 #converting percentages to a number between 0 and 1
-gamelog_stat$OffTOVper<-gamelog_stat$OffTOVper/100
-gamelog_stat$OffDRBper<-gamelog_stat$OffDRBper/100
-gamelog_stat$DefTOVper<-gamelog_stat$DefTOVper/100
-gamelog_stat$DefDRBper<-gamelog_stat$DefDRBper/100
+last_regime_start_id<-which(chicago_stat$Date=="2016-12-16")
+#dim(chicago_gamelog[which(chicago_gamelog$Date=="2016-12-16"):nrow(chicago_gamelog),])
 
-gamelog_discrete_portland<-discretize(gamelog_stat[,-c(1,2,3)], breaks = 10)
-gamelog_discrete_portland$Opp<-factor(gamelog_stat$Opp)
-gamelog_discrete_portland$WL<-factor(gamelog_stat$WL)
-bn1<-hc(gamelog_discrete_portland,score = 'bde')
-bnlearn::score(bn1,gamelog_discrete_portland)
+#training
+nTest_index<-which(chicago_stat$Date=="2020-12-23") 
+chicago_train<-chicago_stat[last_regime_start_id:(nTest_index-1),]
+chicago_test<-chicago_stat[nTest_index:nObs,]
 
 
-graphviz.plot(bn1)
 
-bn2<-gs(gamelog_discrete_portland)
-graphviz.plot(bn2)
 
-Identify_Positions2(data = gamelog_discrete_portland,k=3,n_iteration = 1000)
