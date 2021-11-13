@@ -40,17 +40,36 @@ chicago_gamelog=merge(basic,advanced,by = c('Date','Sep','Opp','WL','TmScore','O
 
 ## Pre-processing 
 
-dataset1=subset(chicago_gamelog,select=c('Date','Opp','WL','TSper','OffeFGper','OffTOVper','OffDRBper','OffFT/FGA',
+dataset1=subset(chicago_gamelog,select=c('Date','Opp','WL',
+                                         'TmFGper','Tm3Pper','TmFTper',
+                                         'OppFGper','Opp3Pper','OppFTper',
+                                         'FTr','TSper','TRBper','ASTper','STLper','BLKper',
+                                         'OffeFGper','OffTOVper','OffDRBper','OffFT/FGA',
                                         'DefeFGper','DefTOVper','DefDRBper','DefFT/FGA'))
 
 #omiting the rows with missing values,https://statisticsglobe.com/r-remove-data-frame-rows-with-some-or-all-na
 
 gamelog_stat_chicago<-dataset1 %>% drop_na()
 #converting percentages to a number between 0 and 1
-gamelog_stat_chicago$OffTOVper<-gamelog_stat_chicago$OffTOVper/100
-gamelog_stat_chicago$OffDRBper<-gamelog_stat_chicago$OffDRBper/100
-gamelog_stat_chicago$DefTOVper<-gamelog_stat_chicago$DefTOVper/100
-gamelog_stat_chicago$DefDRBper<-gamelog_stat_chicago$DefDRBper/100
+
+
+gamelog_stat_chicago[,c('TRBper','ASTper','STLper',
+                        'BLKper','OffTOVper',
+                        'OffDRBper','DefTOVper',
+                        'DefDRBper')]<-gamelog_stat_chicago[,c('TRBper',
+                                                               'ASTper','STLper',
+                                                               'BLKper','OffTOVper',
+                                                               'OffDRBper','DefTOVper',
+                                                               'DefDRBper')]/100
+
+
+#gamelog_stat_chicago$TRBper<-gamelog_stat_chicago$TRBper/100
+#gamelog_stat_chicago$ASTper<-gamelog_stat_chicago$ASTper/100
+
+#gamelog_stat_chicago$OffTOVper<-gamelog_stat_chicago$OffTOVper/100
+#gamelog_stat_chicago$OffDRBper<-gamelog_stat_chicago$OffDRBper/100
+#gamelog_stat_chicago$DefTOVper<-gamelog_stat_chicago$DefTOVper/100
+#gamelog_stat_chicago$DefDRBper<-gamelog_stat_chicago$DefDRBper/100
 
 
 
@@ -75,7 +94,7 @@ for (i in 1:n) {
 
 
 
-gamelog_discrete_chicago<-discretize(gamelog_stat_chicago[,-c(1,2,3,13)], breaks = 10)
+gamelog_discrete_chicago<-discretize(gamelog_stat_chicago[,-c(1,2,3,24)], breaks = 10)
 #gamelog_discrete_chicago$Opp<-factor(gamelog_stat_chicago$Opp)
 gamelog_discrete_chicago$WL<-factor(gamelog_stat_chicago$WL)
 gamelog_discrete_chicago$OppPlayoff<-factor(gamelog_stat_chicago$PlayOff)
