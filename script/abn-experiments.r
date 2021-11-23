@@ -5,65 +5,87 @@ chicago_processed_gamelog=read.csv('PreProcessed_Chicago_Gamelog.csv')
 #number of data points
 nObs<-dim(chicago_processed_gamelog)[1]
 
-#Set:1
-## Variables visualised : Game-Outcome, Home-Away, Opponent team in Playoffs
-par(mfrow=c(3,1))
-barplot(table(chicago_processed_gamelog$WL)/nObs,ylim=c(0,1),main='Game Outcome',ylab='proportion')
-barplot(table(chicago_processed_gamelog$HomeAway)/nObs,ylim=c(0,1),main='Home or Away',ylab='proportion')
-barplot(table(chicago_processed_gamelog$PlayOff)/nObs,ylim=c(0,1),main='Opponent team in Playoffs',ylab='proportion')
+#reference : https://gilleskratzer.github.io/ABN-UseR-2021/hands_on_useR_2021.html
 
-#Set:2
-## Variables visualised : for FG%,3P%,FT% for Chicago Bulls and Opponents (3*2=6 variables)
-par(mfrow=c(2,3))
-hist(chicago_processed_gamelog$TmFGper*100,probability=T,xlab='Team FG%',main ='')
-lines(density(chicago_processed_gamelog$TmFGper*100))
-hist(chicago_processed_gamelog$Tm3Pper*100,probability=T,xlab='Team 3P%',main='')
-lines(density(chicago_processed_gamelog$Tm3Pper*100))
-hist(chicago_processed_gamelog$TmFTper*100,probability=T,xlab='Team FT%',main='')
-lines(density(chicago_processed_gamelog$TmFTper*100))
-hist(chicago_processed_gamelog$OppFGper*100,probability=T,xlab='Opponent FG%',main='')
-lines(density(chicago_processed_gamelog$OppFGper*100))
-hist(chicago_processed_gamelog$Opp3Pper*100,probability=T,xlab='Opponent 3P%',main='')
-lines(density(chicago_processed_gamelog$Opp3Pper*100))
-hist(chicago_processed_gamelog$OppFTper*100,probability=T,xlab='Opponent FT%',main='')
-lines(density(chicago_processed_gamelog$OppFTper*100))
+#Converting Game Outcome, HomeAway and Opponent Playoff Appearance (binary variables) to factor datatype
 
-#Set:3 Six variables, FT rate, TS%, TRB%, AST%, STL%, BLK%
-par(mfrow=c(2,3))
-hist(chicago_processed_gamelog$FTr*100,freq = FALSE,xlab='Free Throw Rate',main ='')
-lines(density(chicago_processed_gamelog$FTr*100))
-hist(chicago_processed_gamelog$TSper*100,probability=T,xlab='TS%',main ='')
-lines(density(chicago_processed_gamelog$TSper*100))
-hist(chicago_processed_gamelog$TRBper*100,probability=T,xlab='TRB%',main ='')
-lines(density(chicago_processed_gamelog$TRBper*100))
+chicago_processed_gamelog$WL<-factor(chicago_processed_gamelog$WL)
+chicago_processed_gamelog$PlayOff<-factor(chicago_processed_gamelog$PlayOff)
+chicago_processed_gamelog$HomeAway<-factor(chicago_processed_gamelog$HomeAway)
 
-hist(chicago_processed_gamelog$ASTper*100,probability=T,xlab='AST%',main ='')
-lines(density(chicago_processed_gamelog$ASTper*100))
-hist(chicago_processed_gamelog$STLper*100,probability=T,xlab='STL%',main ='')
-lines(density(chicago_processed_gamelog$STLper*100))
-hist(chicago_processed_gamelog$BLKper*100,probability=T,xlab='BLK%',main ='')
-lines(density(chicago_processed_gamelog$BLKper*100))
+##Experiment 1 all variables
+#Setting up distribution list
+distribution1<-list(WL="binomial",TmFGper="gaussian",Tm3Pper="gaussian",TmFTper="gaussian",
+                   OppFGper="gaussian",Opp3Pper="gaussian",OppFTper="gaussian",FTr="gaussian",TSper="gaussian",
+                   TRBper="gaussian",ASTper="gaussian",STLper="gaussian",BLKper="gaussian",
+                   OffeFGper="gaussian",OffTOVper="gaussian",OffORBper="gaussian",
+                   OffFT_d_FGA="gaussian",DefeFGper="gaussian",DefTOVper="gaussian",DefDRBper="gaussian",
+                   DefFT_d_FGA="gaussian",HomeAway="binomial",PlayOff="binomial")
+
+#Build cache 
+cache1<-buildScoreCache(data.df=as.data.frame(chicago_processed_gamelog[,-c(1,2)]),
+                       data.dists=distribution1, max.parents = 1)
+#Exact Search
+mp_dag1<-mostProbable(score.cache = cache1)
+fitted_dag1<-fitAbn(object=mp_dag1)
 
 
-#Set:4 Four factors for Chicago Bulls (Offensive and Defensive, 4*2=8)
-par(mfrow=c(4,2))
-hist(chicago_processed_gamelog$OffeFGper*100,probability = T,xlab='Offensive eFG%',main='')
-lines(density(chicago_processed_gamelog$OffeFGper*100))
-hist(chicago_processed_gamelog$OffTOVper*100,probability = T,xlab='Offensive TOV%',main='')
-lines(density(chicago_processed_gamelog$OffTOVper*100))
-##test
-hist(chicago_processed_gamelog$OffORBper*100,probability = T,xlab='ORB%',main='')
-lines(density(chicago_processed_gamelog$OffORBper*100))
-hist(chicago_processed_gamelog$OffFT.FGA*100,probability = T,xlab='Offensive FT/FGA',main='')
-lines(density(chicago_processed_gamelog$OffFT.FGA*100))
+##Experiment 2 using Four factors,Outcome, HomeAway and Playoff
+distribution2<-list(WL="binomial",OffeFGper="gaussian",OffTOVper="gaussian",OffORBper="gaussian",
+                    OffFT_d_FGA="gaussian",DefeFGper="gaussian",DefTOVper="gaussian",DefDRBper="gaussian",
+                    DefFT_d_FGA="gaussian",HomeAway="binomial",PlayOff="binomial")
 
-hist(chicago_processed_gamelog$DefeFGper*100,probability = T,xlab='Defensive eFG%',main='')
-lines(density(chicago_processed_gamelog$DefeFGper*100))
-hist(chicago_processed_gamelog$DefTOVper*100,probability = T,xlab='Defensive TOV%',main='')
-lines(density(chicago_processed_gamelog$DefTOVper*100))
 
-hist(chicago_processed_gamelog$DefDRBper*100,probability = T,xlab='DRB%',main='')
-lines(density(chicago_processed_gamelog$DefDRBper*100))
-hist(chicago_processed_gamelog$DefFT.FGA*100,probability = T,xlab='Defensive FT/FGA',main='')
-lines(density(chicago_processed_gamelog$DefFT.FGA*100))
 
+cache2<-buildScoreCache(data.df=as.data.frame(chicago_processed_gamelog[,c(3,16:25)]),
+                       data.dists=distribution2)
+#Banned matrix
+df<-as.data.frame(chicago_processed_gamelog[,c(3,16:25)])
+banned<-matrix(0,ncol(df),ncol(df))
+rownames(banned)<-colnames(df)
+colnames(banned)<-colnames(df)
+
+#Retained matrix
+retained<-matrix(0,ncol(df),ncol(df))
+rownames(retained)<-colnames(df)
+colnames(retained)<-colnames(df)
+  
+##Banning the arc from any Match Outcome to any other node, since outcome of game might not affect other nodes
+banned[-1,c('WL')]<-1
+banned[c('HomeAway'),c(1:9,11)]<-1
+banned[c('PlayOff'),1:10]<-1
+
+##Retaining the arc from HomeAway and Opponent Playoff appearance to Game Outcome
+retained[c('WL'),c('HomeAway')]<-1
+retained[c('WL'),c('PlayOff')]<-1
+  
+#Exact Search
+mp_dag2<-mostProbable(score.cache = cache2)
+dag2<-fitAbn(object=mp_dag2,dag.banned=banned,dag.retained=retained,create.graph = T)
+plot(dag2)
+
+
+##Running the exact search for parents incremently
+
+#creating a function which takes maximum number of parents parameter as input and calculate the score
+
+NetworkScore<-function(p){
+  
+  #creating cache for the network, for maximum p arents, for 11 variables
+  cached_network<-buildScoreCache(data.df=as.data.frame(chicago_processed_gamelog[,c(3,16:25)]),
+                          data.dists=distribution2, max.parents = p)
+  mp_dag<-mostProbable(score.cache = cached_network)
+  dag_11vars<-fitAbn(object=mp_dag,dag.banned=banned,dag.retained=retained,create.graph = T)
+  return(dag_11vars$mlik)
+  
+}
+
+scores<-sapply(1:10,NetworkScore)
+plot(x=1:10,y=scores,type = 'p',ylim=range(scores) )
+abline(v=which.max(scores))
+     
+cached_network<-buildScoreCache(data.df=as.data.frame(chicago_processed_gamelog[,c(3,16:25)]),
+                                data.dists=distribution2, max.parents = 8)
+mp_dag<-mostProbable(score.cache = cached_network)
+dag_11vars<-fitAbn(object=mp_dag,dag.banned=banned,create.graph = T)
+plot(dag_11vars)
