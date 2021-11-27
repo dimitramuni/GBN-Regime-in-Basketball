@@ -98,23 +98,42 @@ write.csv(gamelog_stat_chicago,'PreProcessed_Chicago_Gamelog.csv',row.names = FA
 
 
 
-gamelog_discrete_chicago<-discretize(gamelog_stat_chicago[,-c(1,2,3,24,25)], breaks = 5)
+gamelog_discrete_chicago<-discretize(gamelog_stat_chicago[,-c(1:3,24:25)], breaks = 5)
 #gamelog_discrete_chicago$Opp<-factor(gamelog_stat_chicago$Opp)
 gamelog_discrete_chicago$WL<-factor(gamelog_stat_chicago$WL)
-gamelog_discrete_chicago$OppPlayoff<-factor(gamelog_stat_chicago$PlayOff)
+gamelog_discrete_chicago$PlayOff<-factor(gamelog_stat_chicago$PlayOff)
 gamelog_discrete_chicago$HomeAway<-factor(gamelog_stat_chicago$HomeAway)
+
+#blacklisting certain arcs
+
+#blacklisting arcs for 11 variables model
+blacklisted_arcs1<<-data.frame(from = c("WL", "WL","WL", "WL","WL", "WL","WL", "WL","WL", "WL",
+                                       "OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","PlayOff",
+                                       "OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","HomeAway"), 
+                              to = c("OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","PlayOff", "HomeAway",
+                                     "HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway",
+                                     "PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff"))
+
+#blacklisting arcs for 23 variables model
+blacklisted_arcs2<-data.frame(from = c("WL", "WL","WL", "WL","WL", "WL","WL", "WL","WL", "WL", "WL", "WL","WL", "WL","WL", "WL","WL", "WL","WL", "WL","WL", "WL",
+                                        'TmFGper','Tm3Pper','TmFTper','OppFGper','Opp3Pper','OppFTper','FTr','TSper','TRBper','ASTper','STLper','BLKper',"OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","PlayOff",
+                                        'TmFGper','Tm3Pper','TmFTper','OppFGper','Opp3Pper','OppFTper','FTr','TSper','TRBper','ASTper','STLper','BLKper',"OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","HomeAway"), 
+                               to = c('TmFGper','Tm3Pper','TmFTper','OppFGper','Opp3Pper','OppFTper','FTr','TSper','TRBper','ASTper','STLper','BLKper',"OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","PlayOff", "HomeAway",
+                                      "HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway",
+                                      "PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff"))
+
 
 
 setwd("~/Desktop/GBN-Regime-in-Basketball/script")
-bn1<-hc(gamelog_discrete_chicago[1:1228,],score = 'bde')
+bn1<-hc(gamelog_discrete_chicago[1:1228,],score = 'bde',blacklist = blacklisted_arcs2)
 bnlearn::score(bn1,gamelog_discrete_chicago)
 graphviz.plot(bn1)
 
-bn2<-hc(gamelog_discrete_chicago[1229:2549,],score='bde')
+bn2<-hc(gamelog_discrete_chicago[1229:2549,],score='bde',blacklist = blacklisted_arcs2)
 bnlearn::score(bn2,gamelog_discrete_chicago)
 graphviz.plot(bn2)
 
-bn3<-hc(gamelog_discrete_chicago[2550:dim(gamelog_discrete_chicago)[1],],score='bde')
+bn3<-hc(gamelog_discrete_chicago[2550:dim(gamelog_discrete_chicago)[1],],score='bde',blacklist = blacklisted_arcs2)
 bnlearn::score(bn3,gamelog_discrete_chicago)
 graphviz.plot(bn3)
 
@@ -130,9 +149,11 @@ graphviz.plot(bn3)
 #bnlearn::score(bn5,gamelog_discrete_chicago)
 #graphviz.plot(bn5)
 
-source('Identify2.R')
+
+
+source('Identify_hc.R')
 start_time<-Sys.time()
-Identify_Positions2(data = gamelog_discrete_chicago,k=3,n_iteration = 10000)
+Identify_Positions_hc(data = gamelog_discrete_chicago,k=3,n_iteration = 10000)
 end_time<-Sys.time()
 cat('time taken: ',end_time-start_time)
 

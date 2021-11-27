@@ -15,10 +15,11 @@ Rcpp::sourceCpp('beta_proposal.cpp')
 #k=4 #maximum number of transition
 #n_iteration=200 # number of MCMC iterations
 
-Loglikelihood_Calculation<-function(dataset){
-  
+Loglikelihood_Calculation_hc<-function(dataset){
+ 
+  #data=gamelog_discrete
   #Learning Bayesian Network using Hill Climbing Algorithm
-  bn<-hc(dataset,score = 'bde')
+  bn<-hc(x=dataset,score = 'bde')
   #Bayesian Dirichilet Equivalent score
   BDE_score<-bnlearn::score(bn, dataset, type = "bde")
   return(BDE_score)
@@ -26,9 +27,8 @@ Loglikelihood_Calculation<-function(dataset){
 
 
 
-Identify_Positions2<-function(data,k,n_iteration){
+Identify_Positions_hc<-function(data,k,n_iteration){
   
-  data=gamelog_discrete
   dataset=data
   n=dim(dataset)[1]
   #set.seed(1728)
@@ -87,7 +87,7 @@ Identify_Positions2<-function(data,k,n_iteration){
     #Structure learning using Hill Climbing Algorithm #L19 and #L23 partly(adding the loglikelihood)
     #n1=length(D_current)
     
-    loglikelihood_D_current_nonzero_deltas=sum(sapply(D_current,Loglikelihood_Calculation))
+    loglikelihood_D_current_nonzero_deltas=sum(sapply(D_current,Loglikelihood_Calculation_hc))
     
     #for (i in 1:n1) {
     
@@ -106,7 +106,7 @@ Identify_Positions2<-function(data,k,n_iteration){
     
     #Structure learning using Hill Climbing Algorithm #L21 and L25 partly (adding the loglikelihood)
     #n2=length(D_proposal)
-    loglikelihood_D_proposal_nonzero_deltas=sum(sapply(D_proposal,Loglikelihood_Calculation))
+    loglikelihood_D_proposal_nonzero_deltas=sum(sapply(D_proposal,Loglikelihood_Calculation_hc))
     #  for (i in 1:n2) {
     
     
