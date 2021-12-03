@@ -97,8 +97,8 @@ write.csv(gamelog_stat_chicago,'PreProcessed_Chicago_Gamelog.csv',row.names = FA
 
 
 
-
-gamelog_discrete_chicago<-discretize(gamelog_stat_chicago[,-c(1:3,24:25)], breaks = 5)
+#11 variables (four factor*2, Outcome,PlayOff,HomeAway)
+gamelog_discrete_chicago<-discretize(gamelog_stat_chicago[,-c(1:15,24:25)], breaks = 5)
 #gamelog_discrete_chicago$Opp<-factor(gamelog_stat_chicago$Opp)
 gamelog_discrete_chicago$WL<-factor(gamelog_stat_chicago$WL)
 gamelog_discrete_chicago$PlayOff<-factor(gamelog_stat_chicago$PlayOff)
@@ -107,7 +107,7 @@ gamelog_discrete_chicago$HomeAway<-factor(gamelog_stat_chicago$HomeAway)
 #blacklisting certain arcs
 
 #blacklisting arcs for 11 variables model
-blacklisted_arcs1<<-data.frame(from = c("WL", "WL","WL", "WL","WL", "WL","WL", "WL","WL", "WL",
+blacklisted_arcs1<-data.frame(from = c("WL", "WL","WL", "WL","WL", "WL","WL", "WL","WL", "WL",
                                        "OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","PlayOff",
                                        "OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","HomeAway"), 
                               to = c("OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","PlayOff", "HomeAway",
@@ -153,7 +153,7 @@ graphviz.plot(bn3)
 
 source('Identify_hc.R')
 start_time<-Sys.time()
-Identify_Positions_hc(data = gamelog_discrete_chicago,k=3,n_iteration = 10000)
+Identify_Positions_hc(data = gamelog_discrete_chicago,k=3,n_iteration = 2)
 end_time<-Sys.time()
 cat('time taken: ',end_time-start_time)
 

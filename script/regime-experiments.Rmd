@@ -1,0 +1,17 @@
+---
+title: "Regime Identification Experiments"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Experimenting with k
+While allowing number of allowed transition to be greater than 3, for e.g. 4,5,6 has not yielded more  unique non zero deltas representing the unique positions than 3.
+
+
+## Experiments with blacklisting arcs 
+
+Experiments with blacklisting arcs, for a model with 23 variables (11 original + 12 ), the model does not seem to work well. 
+

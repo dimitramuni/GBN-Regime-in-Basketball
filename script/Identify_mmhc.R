@@ -17,8 +17,14 @@ Rcpp::sourceCpp('beta_proposal.cpp')
 
 Loglikelihood_Calculation_mmhc<-function(dataset){
   
-  #Learning Bayesian Network using Hill Climbing Algorithm
-  bn<-mmhc(dataset)
+  #Learning Bayesian Network using Hybrid algorithm MMHC Min Max Hill Climbing
+  blacklisted_arcs1<-data.frame(from = c("WL", "WL","WL", "WL","WL", "WL","WL", "WL","WL", "WL",
+                                         "OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","PlayOff",
+                                         "OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","HomeAway"), 
+                                to = c("OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","PlayOff", "HomeAway",
+                                       "HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway",
+                                       "PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff"))
+  bn<-mmhc(dataset,blacklist =blacklisted_arcs1)
   #Bayesian Dirichilet Equivalent score
   BDE_score<-bnlearn::score(bn, dataset)
   return(BDE_score)
@@ -26,9 +32,9 @@ Loglikelihood_Calculation_mmhc<-function(dataset){
 
 
 
-Identify_Positions4<-function(data,k,n_iteration){
+Identify_Positions_mmhc<-function(data,k,n_iteration){
   
-  data=gamelog_discrete
+
   dataset=data
   n=dim(dataset)[1]
   #set.seed(1728)
@@ -151,12 +157,12 @@ Identify_Positions4<-function(data,k,n_iteration){
     #Transition Probabilities Jc (log scale) #L29
     Jc=sum(log(beta_probabilities[c(beta_probabilities$x %in% beta_proposal),2]))
     #Jc=sum(log(.subset2(beta_probabilities,2)[beta_probabilities$x %in% beta_proposal]))
-    if(is.na(Jc)){
-      print(beta_proposed)
-      print(beta_proposal)
-      temp_df<<-data.frame()
-      temp_df<<-beta_probabilities
-      print(beta_probabilities)}
+#    if(is.na(Jc)){
+#      print(beta_proposed)
+#      print(beta_proposal)
+#      temp_df<<-data.frame()
+#      temp_df<<-beta_probabilities
+#      print(beta_probabilities)}
     #cat('\tJc:',Jc)
     #cat('\n')
     

@@ -18,8 +18,15 @@ Rcpp::sourceCpp('beta_proposal.cpp')
 Loglikelihood_Calculation_hc<-function(dataset){
  
   #data=gamelog_discrete
+  blacklisted_arcs1<-data.frame(from = c("WL", "WL","WL", "WL","WL", "WL","WL", "WL","WL", "WL",
+                                         "OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","PlayOff",
+                                         "OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","HomeAway"), 
+                                to = c("OffeFGper","OffTOVper","OffORBper","OffFT_d_FGA","DefeFGper","DefTOVper","DefDRBper","DefFT_d_FGA","PlayOff", "HomeAway",
+                                       "HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway","HomeAway",
+                                       "PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff","PlayOff"))
+                                       
   #Learning Bayesian Network using Hill Climbing Algorithm
-  bn<-hc(x=dataset,score = 'bde')
+  bn<-hc(x=dataset,score = 'bde',blacklist = blacklisted_arcs1)
   #Bayesian Dirichilet Equivalent score
   BDE_score<-bnlearn::score(bn, dataset, type = "bde")
   return(BDE_score)
@@ -151,12 +158,12 @@ Identify_Positions_hc<-function(data,k,n_iteration){
     #Transition Probabilities Jc (log scale) #L29
     Jc=sum(log(beta_probabilities[c(beta_probabilities$x %in% beta_proposal),2]))
     #Jc=sum(log(.subset2(beta_probabilities,2)[beta_probabilities$x %in% beta_proposal]))
-    if(is.na(Jc)){
-      print(beta_proposed)
-      print(beta_proposal)
-      temp_df<<-data.frame()
-      temp_df<<-beta_probabilities
-      print(beta_probabilities)}
+ #   if(is.na(Jc)){
+#      print(beta_proposed)
+ #     print(beta_proposal)
+  #    temp_df<<-data.frame()
+  #    temp_df<<-beta_probabilities
+   #   print(beta_probabilities)}
     #cat('\tJc:',Jc)
     #cat('\n')
     
@@ -188,6 +195,7 @@ Identify_Positions_hc<-function(data,k,n_iteration){
     
     if(iteration==n_iteration){break}         #L43
   }
+  if(iteration %in% c(10000,20000,30000,40000,50000,60000,70000,80000,90000)){cat('\niteration',iteration)}
   
   ##Finding nonzero deltas #L45
   
