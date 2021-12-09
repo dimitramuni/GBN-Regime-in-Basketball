@@ -125,11 +125,11 @@ blacklisted_arcs2<-data.frame(from = c("WL", "WL","WL", "WL","WL", "WL","WL", "W
 
 
 setwd("~/Desktop/GBN-Regime-in-Basketball/script")
-bn1<-hc(gamelog_discrete_chicago[1:1228,],score = 'bde',blacklist = blacklisted_arcs2)
+bn1<-hc(gamelog_discrete_chicago[1:1282,],score = 'bde',blacklist = blacklisted_arcs1)
 bnlearn::score(bn1,gamelog_discrete_chicago)
 graphviz.plot(bn1)
 
-bn2<-hc(gamelog_discrete_chicago[1229:2549,],score='bde',blacklist = blacklisted_arcs2)
+bn2<-hc(gamelog_discrete_chicago[1283:2105,],score='bde',blacklist = blacklisted_arcs1)
 bnlearn::score(bn2,gamelog_discrete_chicago)
 graphviz.plot(bn2)
 

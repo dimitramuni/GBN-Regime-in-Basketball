@@ -15,3 +15,7 @@ While allowing number of allowed transition to be greater than 3, for e.g. 4,5,6
 
 Experiments with blacklisting arcs, for a model with 23 variables (11 original + 12 ), the model does not seem to work well. 
 
+## Structure learning Chicago Bulls 
+Regime location identified as 1283,	2106,	2776
+1189	2022	2773
+

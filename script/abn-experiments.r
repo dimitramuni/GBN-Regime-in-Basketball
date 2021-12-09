@@ -69,7 +69,7 @@ retained[c('WL'),c('PlayOff')]<-1
 #Exact Search'
 
 mp_dag2<-mostprobable(score.cache = cache2,score='mlik',prior.choice = 1)
-dag2<-fitabn(object=mp_dag2,dag.banned=banned,dag.retained=retained,create.graph = T)
+dag2<-fitabn(object=mp_dag2,dag.banned=banned,dag.retained=NULL,create.graph = T)
 plot(dag2)
 
 
@@ -80,7 +80,7 @@ plot(dag2)
 NetworkScore<-function(p){
   
   #creating cache for the network, for maximum p arents, for 11 variables
-  c_network<-buildscorecache(data.df=as.data.frame(chicago_processed_gamelog[,c(3,16:25)]),
+  c_network<-buildscorecache(data.df=as.data.frame(chicago_processed_gamelog[1:1282,c(3,16:25)]),
                           data.dists=distribution2, max.parents = p)
   #most probable and fitting function from abn
   mp_dag<-mostprobable(score.cache = c_network)
@@ -96,11 +96,11 @@ plot(x=1:10,y=scores,type = 'p',ylim=range(scores) ,xlab='Number of parents',yla
 abline(v=which.max(scores))
 
 #Learning the final dag for number of parents for which Network Score is the highest  
-cached_network<-buildscorecache(data.df=as.data.frame(chicago_processed_gamelog[,c(3,16:25)]),
+cached_network1<-buildscorecache(data.df=as.data.frame(chicago_processed_gamelog[1:1282,c(3,16:25)]),
                                 data.dists=distribution2, max.parents = 8,verbose=F)
-mp_dag<-mostProbable(score.cache = cached_network,verbose = F)
-dag_11vars<-fitAbn(object=mp_dag,dag.banned=banned,create.graph = T,verbose = F)
-plot(dag_11vars)
+mp_dag1<-mostprobable(score.cache = cached_network1,verbose = F)
+dag_11vars1<-fitabn(object=mp_dag1,dag.banned=NULL,create.graph = T,verbose = F)
+plot(dag_11vars1)
 
 
 

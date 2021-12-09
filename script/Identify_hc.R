@@ -41,6 +41,7 @@ Identify_Positions_hc<-function(data,k,n_iteration){
   #set.seed(1728)
   
   
+  
   beta_current=numeric(length=k)# container for current Betas
   beta_current=round((1:k)*n/(k+1)) #spacing out Beta evenly (L3)
   
