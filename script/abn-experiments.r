@@ -1,5 +1,6 @@
 #Using additive bayesian modeling package for some experiments
 library(abn)
+library(mcmcabn)
 setwd("~/Desktop/GBN-Regime-in-Basketball/data")
 chicago_processed_gamelog=read.csv('PreProcessed_Chicago_Gamelog.csv')
 #number of data points
@@ -77,10 +78,13 @@ plot(dag2)
 
 #creating a function which takes maximum number of parents parameter as input and calculate the score
 
+regime_list<-list(1:1282,1283:2105,2106:2774,2775:3090)
+
+
 NetworkScore<-function(p){
   
   #creating cache for the network, for maximum p arents, for 11 variables
-  c_network<-buildscorecache(data.df=as.data.frame(chicago_processed_gamelog[1:1282,c(3,16:25)]),
+  c_network<-buildscorecache(data.df=as.data.frame(chicago_processed_gamelog[regime_list[[1]],c(3,16:25)]),
                           data.dists=distribution2, max.parents = p)
   #most probable and fitting function from abn
   mp_dag<-mostprobable(score.cache = c_network)
@@ -96,21 +100,55 @@ plot(x=1:10,y=scores,type = 'p',ylim=range(scores) ,xlab='Number of parents',yla
 abline(v=which.max(scores))
 
 #Learning the final dag for number of parents for which Network Score is the highest  
-cached_network1<-buildscorecache(data.df=as.data.frame(chicago_processed_gamelog[1:1282,c(3,16:25)]),
+cached_network1<-buildscorecache(data.df=as.data.frame(chicago_processed_gamelog[regime_list[[1]],c(3,16:25)]),
                                 data.dists=distribution2, max.parents = 8,verbose=F)
-mp_dag1<-mostprobable(score.cache = cached_network1,verbose = F)
-dag_11vars1<-fitabn(object=mp_dag1,dag.banned=NULL,create.graph = T,verbose = F)
-plot(dag_11vars1)
+mp_dag1<-mostprobable(score.cache = cached_network1,verbose = T)
+dag11<-fitabn(object=mp_dag1,dag.banned=NULL,create.graph = T,verbose = F)
+plot(dag11)
 
 
+########### mcmcabn package experiments
+
+
+mcmc_dag1<-mcmcabn(score.cache=cached_network1,
+                      score = "mlik",
+                      data.dists = distribution2,
+                      max.parents = 8,
+                      mcmc.scheme = c(100,1000,1000),
+                      seed = 42,
+                      verbose = T,
+                      start.dag = NULL,
+                      prior.dag = NULL,
+                      prior.lambda = NULL,
+                      prob.rev = 0.05,
+                      prob.mbr = 0.05,
+                      heating = 1,
+                      prior.choice = 2
+                      )
+
+###############Parametric Bootstrapping 
+
+l<-length(dag11$marginals)
+m<-dag11$marginals[[1]]
+for (i in 2:l) {
+  m<-c(m,dag11$marginals[[i]])
+  }
+
+
+
+WL.p<-cbind(m[[names(m)[1]]],m[[names(m)[2]]],m[[names(m)[3]]],m[[names(m)[4]]],m[[names(m)[5]]],m[[names(m)[6]]],m[[names(m)[7]]],m[[names(m)[8]]],m[[names(m)[9]]])
+OffeFGper.p<-cbind(m[[names(m)[10]]],m[[names(m)[11]]])
+OffTOVper.p<-cbind(m[[names(m)[12]]],m[[names(m)[13]]],m[[names(m)[14]]],m[[names(m)[15]]],m[[names(m)[16]]])
+OffORBper.p<-cbind(m[[names(m)[17]]],m[[names(m)[18]]])
+OffFT_d_FGA.p<-cbind(m[[names(m)[19]]],m[[names(m)[20]]])
 
 ####Regime Identification for 11 vars
-source('Identify_exact_abn.R')
-start_time<-Sys.time()
-Identify_Positions_abn(data=chicago_processed_gamelog[,c(3,16:25)],
-                       distribution =distribution2,banned=banned,retained=retained,max_parents = 8,k=3, n_iteration = 2)
-end_time<-Sys.time()
-cat('time taken: ',end_time-start_time)
+#source('Identify_exact_abn.R')
+#start_time<-Sys.time()
+#Identify_Positions_abn(data=chicago_processed_gamelog[,c(3,16:25)],
+#                       distribution =distribution2,banned=banned,retained=retained,max_parents = 8,k=3, n_iteration = 2)
+#end_time<-Sys.time()
+#cat('time taken: ',end_time-start_time)
 
 
 

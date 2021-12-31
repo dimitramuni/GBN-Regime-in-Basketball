@@ -5,6 +5,14 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(bnlearn)
+library(gRain)
+library(Rgraphviz)
+library(graph)
+library(grid)
+library(snow)
+library(tidyverse)
+library(lubridate)
 ```
 
 ## Experimenting with k
@@ -13,9 +21,258 @@ While allowing number of allowed transition to be greater than 3, for e.g. 4,5,6
 
 ## Experiments with blacklisting arcs 
 
+
 Experiments with blacklisting arcs, for a model with 23 variables (11 original + 12 ), the model does not seem to work well. 
 
 ## Structure learning Chicago Bulls 
 Regime location identified as 1283,	2106,	2776
 1189	2022	2773
+
+## Predictions for the last regimes
+R1 "1999-02-09"
+> gamelog_stat_chicago$Date[1283]
+[1] "1999-02-11"
+> gamelog_stat_chicago$Date[2105]
+[1] "2009-01-12"
+> gamelog_stat_chicago$Date[2106]
+[1] "2009-01-14"
+> gamelog_stat_chicago$Date[2775]
+[1] "2017-03-15"
+> gamelog_stat_chicago$Date[2776]
+[1] "2017-03-17"
+
+
+
+
+
+
+
+
+
+
+```{r}
+
+regime_list<-list(1:1282,1283:2105,2106:2774,2775:3090)
+
+#dag4=model2network("[HomeAway][DefFT_d_FGA][OffeFGper][OffTOVper][OffORBper][OffFT_d_FGA][DefeFGper][DefDR#Bper][DefTOVper|DefFT_d_FGA][WL|OffeFGper:OffTOVper:OffORBper:OffFT_d_FGA:DefeFGper:DefFT_d_FGA:DefTOVper:#DefDRBper][PlayOff|WL]")
+
+
+gamelog_stat_chicago=read.csv('~/Desktop/GBN-Regime-in-Basketball/data/PreProcessed_Chicago_Gamelog.csv')
+
+gamelog_discrete_chicago<-discretize(gamelog_stat_chicago[,-c(1:15,24:25)],method='quantile',breaks = 5)
+
+
+#gamelog_discrete_chicago$Opp<-factor(gamelog_stat_chicago$Opp)
+gamelog_discrete_chicago$WL<-factor(gamelog_stat_chicago$WL)
+gamelog_discrete_chicago$PlayOff<-factor(gamelog_stat_chicago$PlayOff)
+gamelog_discrete_chicago$HomeAway<-factor(gamelog_stat_chicago$HomeAway)
+
+
+
+regime_data=gamelog_discrete_chicago[regime_list[[4]],]
+
+set.seed(1728)
+train_id=sample(1:dim(regime_data)[1],floor(0.80*dim(regime_data)[1]))
+
+regime_data_train=regime_data[train_id,]
+regime_data_test=regime_data[-train_id,]
+
+
+bn<-hc(regime_data_train,
+        score = 'bde',
+        restart = 1000,
+        maxp=8)
+cat('\nBDe score ',bnlearn::score(bn,regime_data_train))
+graphviz.plot(bn)
+
+
+
+#computing accuracy of learned BN for training data
+
+
+
+fitted_expertBN<-bn.fit(bn,data=as.data.frame(regime_data_train))
+fitted_grain<-as.grain(fitted_expertBN)
+
+
+train_predictions<-c()
+
+
+for (i in 1:dim(regime_data_train)[1]) {
+
+    bn_net<-setEvidence(compile(fitted_grain),nodes = colnames(regime_data_train)[-9],
+                states = c(as.character(regime_data_train$OffeFGper[i]),
+                           as.character(regime_data_train$OffTOVper[i]),
+                           as.character(regime_data_train$OffORBper[i]),
+                           as.character(regime_data_train$OffFT_d_FGA[i]),
+                           as.character(regime_data_train$DefeFGper[i]),
+                           as.character(regime_data_train$DefTOVper[i]),
+                           as.character(regime_data_train$DefDRBper[i]),
+                           as.character(regime_data_train$DefFT_d_FGA[i]),
+                           as.character(regime_data_train$PlayOff[i]),
+                           as.character(regime_data_train$HomeAway[i])
+                           ))
+
+    x<-querygrain(bn_net,'WL')
+    train_predictions=rbind(train_predictions,x$WL)
+    
+}
+
+pred<-apply(train_predictions,MARGIN = 1,FUN = which.max)
+predicted_outcome<-factor(ifelse(pred==1,'L','W'))
+
+tb<-table(predicted_outcome,regime_data_train$WL)
+cat('\n train accuracy',sum(diag(tb))/sum(tb))
+
+#################################
+#computing accuracy of learned BN for test data
+test_predictions<-c()
+
+
+
+for (i in 1:dim(regime_data_test)[1]) {
+
+    bn_net<-setEvidence(compile(fitted_grain),nodes = colnames(regime_data_test)[-9],
+                states = c(as.character(regime_data_test$OffeFGper[i]),
+                           as.character(regime_data_test$OffTOVper[i]),
+                           as.character(regime_data_test$OffORBper[i]),
+                           as.character(regime_data_test$OffFT_d_FGA[i]),
+                           as.character(regime_data_test$DefeFGper[i]),
+                           as.character(regime_data_test$DefTOVper[i]),
+                           as.character(regime_data_test$DefDRBper[i]),
+                           as.character(regime_data_test$DefFT_d_FGA[i]),
+                           as.character(regime_data_test$PlayOff[i]),
+                           as.character(regime_data_test$HomeAway[i])
+                           ))
+
+    x<-querygrain(bn_net,'WL')
+    test_predictions=rbind(test_predictions,x$WL)
+    
+}
+
+pred<-apply(test_predictions,MARGIN = 1,FUN = which.max)
+predicted_outcome<-factor(ifelse(pred==1,'L','W'))
+
+tb<-table(predicted_outcome,regime_data_test$WL)
+cat('\ntest accuracy',sum(diag(tb))/sum(tb))
+
+```
+
+
+
+
+```{r}
+
+
+
+#dag_main=model2network("[OffORBper][DefTOVper|OffORBper][HomeAway|OffORBper][OffFT_d_FGA|OffORBper][OffeFGper|DefTOVper]#[DefFT_d_FGA|OffFT_d_FGA:DefTOVper:HomeAway][DefDRBper|OffFT_d_FGA:OffORBper:DefTOVper:HomeAway][OffTOVper|OffFT_d_FGA:O#ffeFGper:DefTOVper:HomeAway][DefeFGper|DefDRBper:OffTOVper:HomeAway:OffeFGper:DefTOVper][WL|OffFT_d_FGA:DefFT_d_FGA:DefD#RBper:OffTOVper:OffeFGper:DefeFGper:DefTOVper:OffORBper][PlayOff|WL]")
+
+
+regime_list<-list(1:1282,1283:2105,2106:2774,2775:3090)
+
+#dag4=model2network("[HomeAway][DefFT_d_FGA][OffeFGper][OffTOVper][OffORBper][OffFT_d_FGA][DefeFGper][DefDR#Bper][DefTOVper|DefFT_d_FGA][WL|OffeFGper:OffTOVper:OffORBper:OffFT_d_FGA:DefeFGper:DefFT_d_FGA:DefTOVper:#DefDRBper][PlayOff|WL]")
+
+
+gamelog_stat_chicago=read_csv('~/Desktop/GBN-Regime-in-Basketball/data/PreProcessed_Chicago_Gamelog.csv')
+
+gamelog_discrete_chicago<-discretize(gamelog_stat_chicago[,-c(1:15,24:25)],method='quantile',breaks = 5)
+
+
+#gamelog_discrete_chicago$Opp<-factor(gamelog_stat_chicago$Opp)
+gamelog_discrete_chicago$WL<-factor(gamelog_stat_chicago$WL)
+gamelog_discrete_chicago$PlayOff<-factor(gamelog_stat_chicago$PlayOff)
+gamelog_discrete_chicago$HomeAway<-factor(gamelog_stat_chicago$HomeAway)
+
+
+
+regime_data=gamelog_discrete_chicago[regime_list[[4]],]
+
+set.seed(1728)
+train_id=sample(1:dim(regime_data)[1],floor(0.80*dim(regime_data)[1]))
+
+regime_data_train=regime_data[train_id,]
+regime_data_test=regime_data[-train_id,]
+
+
+bn<-hc(gamelog_discrete_chicago,
+        score = 'bde',
+        restart = 1000,
+        maxp=8)
+cat('\nBDe score',bnlearn::score(bn,regime_data_train))
+graphviz.plot(bn)
+
+
+##fitting the model and setting up for evidence propogation using gRain package
+
+
+fitted_expertBN<-bn.fit(bn,data=as.data.frame(gamelog_discrete_chicago))
+fitted_grain<-as.grain(fitted_expertBN)
+
+
+#computing training  accuracy of BN using entire dataset
+train_predictions<-c()
+for (i in 1:dim(regime_data_train)[1]) {
+
+    bn_net<-setEvidence(compile(fitted_grain),nodes = colnames(regime_data_train)[-9],
+                states = c(as.character(regime_data_train$OffeFGper[i]),
+                           as.character(regime_data_train$OffTOVper[i]),
+                           as.character(regime_data_train$OffORBper[i]),
+                           as.character(regime_data_train$OffFT_d_FGA[i]),
+                           as.character(regime_data_train$DefeFGper[i]),
+                           as.character(regime_data_train$DefTOVper[i]),
+                           as.character(regime_data_train$DefDRBper[i]),
+                           as.character(regime_data_train$DefFT_d_FGA[i]),
+                           as.character(regime_data_train$PlayOff[i]),
+                           as.character(regime_data_train$HomeAway[i])
+                           ))
+
+    x<-querygrain(bn_net,'WL')
+    train_predictions=rbind(train_predictions,x$WL)
+    
+}
+
+pred<-apply(train_predictions,MARGIN = 1,FUN = which.max)
+predicted_outcome<-factor(ifelse(pred==1,'L','W'))
+
+tb<-table(predicted_outcome,regime_data_train$WL)
+cat('train accuracy',sum(diag(tb))/sum(tb))
+
+#################################
+#computing accuracy of learned BN for test data
+test_predictions<-c()
+
+
+
+for (i in 1:dim(regime_data_test)[1]) {
+
+    bn_net<-setEvidence(compile(fitted_grain),nodes = colnames(regime_data_test)[-9],
+                states = c(as.character(regime_data_test$OffeFGper[i]),
+                           as.character(regime_data_test$OffTOVper[i]),
+                           as.character(regime_data_test$OffORBper[i]),
+                           as.character(regime_data_test$OffFT_d_FGA[i]),
+                           as.character(regime_data_test$DefeFGper[i]),
+                           as.character(regime_data_test$DefTOVper[i]),
+                           as.character(regime_data_test$DefDRBper[i]),
+                           as.character(regime_data_test$DefFT_d_FGA[i]),
+                           as.character(regime_data_test$PlayOff[i]),
+                           as.character(regime_data_test$HomeAway[i])
+                           ))
+
+    x<-querygrain(bn_net,'WL')
+    test_predictions=rbind(test_predictions,x$WL)
+    
+}
+
+pred<-apply(test_predictions,MARGIN = 1,FUN = which.max)
+predicted_outcome<-factor(ifelse(pred==1,'L','W'))
+
+tb<-table(predicted_outcome,regime_data_test$WL)
+cat('\ntest accuracy',sum(diag(tb))/sum(tb))
+
+
+
+
+
+
+```
 

@@ -1,4 +1,5 @@
 library(abn)
+library(mcmcabn)
 setwd("~/Desktop/GBN-Regime-in-Basketball/data")
 chicago_processed_gamelog=read.csv('PreProcessed_Chicago_Gamelog.csv')
 #number of data points
@@ -67,4 +68,4 @@ NetworkScore<-function(p){
 mp_dag<-mostProbable(score.cache = cached_alpha)
 dag<-fitAbn(object=mp_dag,dag.banned=banned,dag.retained=retained,create.graph = T)
 plot(dag)
-abn::plotAbn(dag)
+

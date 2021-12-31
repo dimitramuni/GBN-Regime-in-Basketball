@@ -125,17 +125,47 @@ blacklisted_arcs2<-data.frame(from = c("WL", "WL","WL", "WL","WL", "WL","WL", "W
 
 
 setwd("~/Desktop/GBN-Regime-in-Basketball/script")
-bn1<-hc(gamelog_discrete_chicago[1:1282,],score = 'bde',blacklist = blacklisted_arcs1)
+
+bn_overall<-hc(gamelog_discrete_chicago,
+               score = 'bde',
+               restart = 1000,
+               blacklist = blacklisted_arcs1,
+               maxp=8)
+bnlearn::score(bn_overall,gamelog_discrete_chicago)
+graphviz.plot(bn_overall)
+
+bn1<-hc(gamelog_discrete_chicago[1:1282,],
+        score = 'bde',
+        blacklist = blacklisted_arcs1,
+        restart = 1000,
+        maxp=8)
 bnlearn::score(bn1,gamelog_discrete_chicago)
 graphviz.plot(bn1)
 
-bn2<-hc(gamelog_discrete_chicago[1283:2105,],score='bde',blacklist = blacklisted_arcs1)
+bn2<-hc(gamelog_discrete_chicago[1283:2105,],score = 'bde',
+        restart = 1000,
+        blacklist = blacklisted_arcs1,
+        maxp=8)
 bnlearn::score(bn2,gamelog_discrete_chicago)
 graphviz.plot(bn2)
 
-bn3<-hc(gamelog_discrete_chicago[2550:dim(gamelog_discrete_chicago)[1],],score='bde',blacklist = blacklisted_arcs2)
+
+bn3<-hc(gamelog_discrete_chicago[2106:2775,],
+        score = 'bde',
+        restart = 1000,
+        blacklist = blacklisted_arcs1,
+        maxp=8)
 bnlearn::score(bn3,gamelog_discrete_chicago)
 graphviz.plot(bn3)
+
+
+bn4<-hc(gamelog_discrete_chicago[2776:dim(gamelog_discrete_chicago)[1],],
+        blacklist = blacklisted_arcs1,
+        score = 'bde',
+        restart = 1000,
+        maxp=8)
+bnlearn::score(bn4,gamelog_discrete_chicago)
+graphviz.plot(bn4)
 
 #bn3<-rsmax2(gamelog_discrete_chicago)
 #bnlearn::score(bn3,gamelog_discrete_chicago)
@@ -156,5 +186,17 @@ start_time<-Sys.time()
 Identify_Positions_hc(data = gamelog_discrete_chicago,k=3,n_iteration = 2)
 end_time<-Sys.time()
 cat('time taken: ',end_time-start_time)
+
+teams_in_playoff=playoff_appearance$Teams[1]
+for (i in 2:length(playoff_appearance$Teams)) {
+ teams_in_playoff=paste(teams_in_playoff,playoff_appearance$Teams[i],sep = ',')
+  
+}
+split_teams=unlist(strsplit(teams_in_playoff,','))
+table(split_teams)
+
+
+champions=read.csv('NBA_Champions.csv')
+
 
 
