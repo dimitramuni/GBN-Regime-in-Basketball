@@ -96,7 +96,7 @@ for (i in 1:n) {
   gamelog_stat_detroit$PlayOff[i]= grepl(gamelog_stat_detroit$Opp[i], playoff_appearance$Teams[playoff_row_index])
   
 }
-write.csv(gamelog_stat_detroit,'PreProcessed_Detroit_Gamelog.csv',row.names = FALSE)
+write.csv(gamelog_stat_detroit,'~/Desktop/GBN-Regime-in-Basketball/data/PreProcessed_Detroit_Gamelog.csv',row.names = FALSE)
 
 
 
@@ -161,16 +161,14 @@ Identify_Positions_hc(data = gamelog_discrete_detroit,k=5,n_iteration = 2000)
 end_time<-Sys.time()
 cat('time taken: ',end_time-start_time)
 
-teams_in_playoff=playoff_appearance$Teams[1]
-for (i in 2:length(playoff_appearance$Teams)) {
-  teams_in_playoff=paste(teams_in_playoff,playoff_appearance$Teams[i],sep = ',')
+#teams_in_playoff=playoff_appearance$Teams[1]
+#for (i in 2:length(playoff_appearance$Teams)) {
+#  teams_in_playoff=paste(teams_in_playoff,playoff_appearance$Teams[i],sep = ',')
   
-}
-split_teams=unlist(strsplit(teams_in_playoff,','))
-table(split_teams)
-
-
-champions=read.csv('NBA_Champions.csv')
+#}
+#split_teams=unlist(strsplit(teams_in_playoff,','))
+#table(split_teams)
+#champions=read.csv('~/Desktop/GBN-Regime-in-Basketball/data/NBA_Champions.csv')
 
 
 

@@ -15,9 +15,9 @@ library(snow)
 library(tidyverse)
 
 #merging basic and advanced stat
-setwd("~/Desktop/GBN-Regime-in-Basketball/data")
 
-basic=read.csv('Portland_basic_gamelog_8081_2021.csv')
+
+basic=read.csv('~/Desktop/GBN-Regime-in-Basketball/data/Portland_basic_gamelog_8081_2021.csv')
 colnames(basic)<-c('Date','Sep','Opp','WL','TmScore','OppScore',
                    'TmFG','TmFGA','TmFGper','Tm3P','Tm3PA','Tm3Pper','TmFT','TmFTA','TmFTper',
                    'TmORB','TmTRB','TmAST','TmSTL','TmBLK','TmTOV','TmPF',
@@ -25,7 +25,7 @@ colnames(basic)<-c('Date','Sep','Opp','WL','TmScore','OppScore',
                    'OppORB','OppTRB','OppAST','OppSTL','OppBLK','OppTOV','OppPF')
 
 
-advanced=read.csv('Portland_advanced_gamelog_8081_2021.csv')
+advanced=read.csv('~/Desktop/GBN-Regime-in-Basketball/data/Portland_advanced_gamelog_8081_2021.csv')
 colnames(advanced)<-c('Date','Sep','Opp','WL','TmScore','OppScore',
                       'ORtg','DRtg','Pace','FTr','3PAr','TSper','TRBper','ASTper','STLper','BLKper',
                       'OffeFGper','OffTOVper','OffORBper','OffFT_d_FGA',
@@ -83,7 +83,7 @@ gamelog_stat_portland[,c('TRBper','ASTper','STLper',
 
 #finding out number of matches in the dataset
 n=dim(gamelog_stat_portland)[1]
-playoff_appearance=read.csv('PlayoffAppearance.csv')
+playoff_appearance=read.csv('~/Desktop/GBN-Regime-in-Basketball/data/PlayoffAppearance.csv')
 all_intervals=interval(playoff_appearance$StartDate,playoff_appearance$EndDate)
 for (i in 1:n) {
   
@@ -94,7 +94,7 @@ for (i in 1:n) {
   gamelog_stat_portland$PlayOff[i]= grepl(gamelog_stat_portland$Opp[i], playoff_appearance$Teams[playoff_row_index])
   
 }
-write.csv(gamelog_stat_portland,'PreProcessed_Portland_Gamelog.csv',row.names = FALSE)
+write.csv(gamelog_stat_portland,'~/Desktop/GBN-Regime-in-Basketball/data/PreProcessed_Portland_Gamelog.csv',row.names = FALSE)
 
 
 

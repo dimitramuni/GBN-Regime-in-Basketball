@@ -200,3 +200,12 @@ champions=read.csv('NBA_Champions.csv')
 
 
 
+regime_list<-list(1:1283,1284:2113,2114:2773,2774:3090)
+
+for (i in 1:length(regime_list)) {
+  
+  bn<-hc(x= gamelog_discrete_chicago[regime_list[[i]],],score = 'bde',blacklist = blacklisted_arcs1)
+  #Bayesian Dirichilet Equivalent score
+  cat('\n regime',i,'\t BDe',bnlearn::score(bn, gamelog_discrete_chicago[regime_list[[i]],], type = "bde"))
+  
+}

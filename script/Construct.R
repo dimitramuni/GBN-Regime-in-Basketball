@@ -37,7 +37,7 @@ resampled_regime=Rn[[3]]    #L9
 for (iteration in 1:nResample) {    #L10
   
   for (i in 1:nRegimes) {
-   i=1
+ 
      #number of observation in Regime i
    
     nObservation= dim(resampled_regime[[i]])[1]

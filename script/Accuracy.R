@@ -35,7 +35,7 @@ Accuracy_GBN<-function(GBN,resamples,R,tau,theta){
           if(is.null(CBN)) {break}
           
           #subset data to be used for Ratio test
-          subset_data=resampled_regime[[regime]][1:t,]
+          subset_data=resampled_regime[[regime]][t,]
           
           Log_Ratio=LL_GBN(subset_data,CBN) - LL_GBN(subset_data,PBN)
           

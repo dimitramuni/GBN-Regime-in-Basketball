@@ -130,7 +130,7 @@ Identify_Positions_hc<-function(data,k,n_iteration){
     #Prior distribution for current beta varaibles
     U_distribution_current=uniform_distributioncpp(betas = beta_current,n=n,k=k)
     
-    #Prior distribution for proposal Indicator variables 
+    #Prior distribution for current Indicator variables 
     I_distribution_current= sum(dbern(x=I_current,prob=0.5,log = TRUE))
     
     #Prior distribution for proposal beta varaibles
