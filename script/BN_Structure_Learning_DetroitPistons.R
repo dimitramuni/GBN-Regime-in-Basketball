@@ -172,3 +172,18 @@ cat('time taken: ',end_time-start_time)
 
 
 
+#Learning Bayesian Network using Hill Climbing Algorithm
+#bn<-hc(x=dataset,score = 'bde')
+
+
+regime_list<-list(1:755,756:2451,2452:2974)
+
+for (i in 1:length(regime_list)) {
+  
+  bn<-hc(x= gamelog_discrete_detroit[regime_list[[i]],],score = 'bde',blacklist = blacklisted_arcs1)
+  #Bayesian Dirichilet Equivalent score
+  cat('\n regime',i,'\t BDe',bnlearn::score(bn, gamelog_discrete_detroit[regime_list[[i]],], type = "bde"))
+  
+}
+
+
