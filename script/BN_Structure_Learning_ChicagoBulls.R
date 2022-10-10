@@ -104,6 +104,13 @@ gamelog_discrete_chicago$WL<-factor(gamelog_stat_chicago$WL)
 gamelog_discrete_chicago$PlayOff<-factor(gamelog_stat_chicago$PlayOff)
 gamelog_discrete_chicago$HomeAway<-factor(gamelog_stat_chicago$HomeAway)
 
+
+source('~/Desktop/GBN-Regime-in-Basketball/script/Identify_hc.R')
+start_time<-Sys.time()
+Identify_Positions_hc(data = gamelog_discrete_chicago,k=3,n_iteration = 2000)
+end_time<-Sys.time()
+cat('time taken: ',end_time-start_time)
+
 #blacklisting certain arcs
 
 #blacklisting arcs for 11 variables model

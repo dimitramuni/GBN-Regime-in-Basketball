@@ -98,7 +98,7 @@ Alternate Approach considering attempts(FGA,3PA,FTA),assists,block,steal,rebound
 bn_to_discretise_attempts=chicago_9798[,c('Tm.x','FGA','FTA','X3PA','AST','TRB')]
 bn_to_discretise_attempts$Tm<-bn_to_discretise_attempts$Tm.x
 
-bn_to_discretise_attempts=as.data.frame(apply(bn_to_discretise_attempts,MARGIN=2,FUN=as.numeric))
+bn_to_discretise_attempts=as.data.frame(apply(bn_to_discretise_attempts,MARGIN=2,FUN=as.numeric))d
 
 
 bn_discrete_attempts=discretize(bn_to_discretise_attempts[,-1], breaks = 5)
