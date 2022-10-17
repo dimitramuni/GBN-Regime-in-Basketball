@@ -1,7 +1,7 @@
 #With the courtsey of Marcus Bendtsen
 ## Identifyinig regime change in the data set using Rcpp implmentation
 ## Based on work by Bendtsen M. (2017), https://link.springer.com/article/10.1007/s10618-017-0510-5
-setwd("~/Desktop/GBN-Regime-in-Basketball/script")
+setwd("~/Desktop/GBN-Regime-in-Basketball/script/Regime Identification")
 #source('uniform_distribution.R')
 #source('beta_proposal.R')
 require(textshape)
