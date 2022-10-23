@@ -28,7 +28,7 @@ Loglikelihood_Calculation_hc<-function(dataset){
                                        
   #Learning Bayesian Network using Hill Climbing Algorithm
   #bn<-hc(x=dataset,score = 'bde')
-  bn<-hc(x=dataset,score = 'bde')
+  bn<-hc(x=dataset,score = 'bde', optimized = TRUE)
   #Bayesian Dirichilet Equivalent score
   BDE_score<-bnlearn::score(bn, dataset, type = "bde")
   return(BDE_score)

@@ -18,7 +18,7 @@ library(lubridate)
 
 
 
-basic=read.csv('~/Desktop/GBN-Regime-in-Basketball/data/Lakers_basic_gamelog_9697_1516.csv')
+basic=read.csv('~/Desktop/GBN-Regime-in-Basketball/data/LosAngeles_Lakers/Lakers_basic_gamelog_9697_1516.csv')
 colnames(basic)<-c('Date','Sep','Opp','WL','TmScore','OppScore',
                    'TmFG','TmFGA','TmFGper','Tm3P','Tm3PA','Tm3Pper','TmFT','TmFTA','TmFTper',
                    'TmORB','TmTRB','TmAST','TmSTL','TmBLK','TmTOV','TmPF',
@@ -26,7 +26,7 @@ colnames(basic)<-c('Date','Sep','Opp','WL','TmScore','OppScore',
                    'OppORB','OppTRB','OppAST','OppSTL','OppBLK','OppTOV','OppPF')
 
 
-advanced=read.csv('~/Desktop/GBN-Regime-in-Basketball/data/Lakers_advanced_gamelog_9697_1516.csv')
+advanced=read.csv('~/Desktop/GBN-Regime-in-Basketball/data/LosAngeles_Lakers/Lakers_advanced_gamelog_9697_1516.csv')
 colnames(advanced)<-c('Date','Sep','Opp','WL','TmScore','OppScore',
                       'ORtg','DRtg','Pace','FTr','3PAr','TSper','TRBper','ASTper','STLper','BLKper',
                       'OffeFGper','OffTOVper','OffORBper','OffFT_d_FGA',
@@ -40,7 +40,7 @@ lakers_gamelog=merge(basic,advanced,by = c('Date','Sep','Opp','WL','TmScore','Op
 
 ## Pre-processing 
 
-dataset1=subset(lakers_gamelog,select=c('Date','Sep','Opp','WL',
+gamelog_stat_lakers=subset(lakers_gamelog,select=c('Date','Sep','Opp','WL',
                                          'TmFGper','Tm3Pper','TmFTper',
                                          'OppFGper','Opp3Pper','OppFTper',
                                          'FTr','TSper','TRBper','ASTper','STLper','BLKper',
@@ -50,12 +50,22 @@ dataset1=subset(lakers_gamelog,select=c('Date','Sep','Opp','WL',
 #omiting the rows with missing values,https://statisticsglobe.com/r-remove-data-frame-rows-with-some-or-all-na
 
 
-gamelog_stat_lakers<-dataset1 %>% drop_na()
+#deciding if the game was played at home, True or False
+gamelog_stat_lakers$HomeGame<- ifelse(gamelog_stat_lakers$Sep=='@',FALSE,TRUE)
 
+#If the team won in the game, True or False
+gamelog_stat_lakers$WL<-ifelse(gamelog_stat_lakers$WL=='W',TRUE,FALSE)
 
-#deciding if the game was played at home or away
-gamelog_stat_lakers$HomeAway<- ifelse(gamelog_stat_lakers$Sep=='@','Away','Home')
-gamelog_stat_lakers<-gamelog_stat_lakers[,-c(2)] 
+#Filling NA values with 0s for Tm3Pper and Opp3Pper
+gamelog_stat_lakers$Tm3Pper[is.na(gamelog_stat_lakers$Tm3Pper)]<-0
+gamelog_stat_lakers$Opp3Pper[is.na(gamelog_stat_lakers$Opp3Pper)]<-0
+
+## dropping the Sep column
+gamelog_stat_lakers <-gamelog_stat_lakers[,-c(2)] 
+
+#Dropping all the rows with NA
+gamelog_stat_lakers<-gamelog_stat_lakers %>% drop_na()
+
 
 #converting percentages to a number between 0 and 1
 gamelog_stat_lakers[,c('TRBper','ASTper','STLper',
@@ -94,7 +104,7 @@ for (i in 1:n) {
   gamelog_stat_lakers$PlayOff[i]= grepl(gamelog_stat_lakers$Opp[i], playoff_appearance$Teams[playoff_row_index])
   
 }
-write.csv(gamelog_stat_lakers,'~/Desktop/GBN-Regime-in-Basketball/data/PreProcessed_Lakers_Gamelog.csv',row.names = FALSE)
+write.csv(gamelog_stat_lakers,'~/Desktop/GBN-Regime-in-Basketball/data/LosAngeles_Lakers/PreProcessed_Lakers_Gamelog.csv',row.names = FALSE)
 
 
 
