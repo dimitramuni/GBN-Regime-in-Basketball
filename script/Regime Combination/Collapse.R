@@ -1,6 +1,6 @@
 ## Based on work  by Bendtsen M. (2017), https://link.springer.com/article/10.1007/s10618-017-0510-5
 #This script contains, a helper function for Merge.R 
-source('~/Desktop/GBN-Regime-in-Basketball/script/Combine.R')
+source('~/Desktop/GBN-Regime-in-Basketball/script/Regime Combination/Combine5.R')
 
 Collapse_Regime_Child<-function(R,C,RC){
   

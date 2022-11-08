@@ -8,7 +8,7 @@ Combine_Regime_Child5<-function(R,C,i,j){
   
   R_new[[i]]=rbind(R_new[[i]],R_new[[j]]) #L27
   
-  R_new=R_new[-j] #L28 removing regime j from Rnew and reindexed automatically
+  R_new<-R_new[-j] #L28 removing regime j from Rnew and reindexed automatically
   
   C_new<-C  #L30
   

@@ -2,11 +2,11 @@
 ## Based on work  by Bendtsen M. (2017), https://link.springer.com/article/10.1007/s10618-017-0510-5
 ## See Appendix A.2
 
-source('Collapse.R')
+source("~/Desktop/GBN-Regime-in-Basketball/script/Regime Combination/Collapse.R")
 require(textshape)
 require(bnlearn)
 require(Rlab)
-Unique_Sorted_NonZero_Deltas<-c(500,2500,4200)
+Unique_Sorted_NonZero_Deltas<-c(501,1801,3500,4201)
 nonzero_delta_from_Identify<-Unique_Sorted_NonZero_Deltas
 
 #Merge Function #L1
@@ -36,15 +36,15 @@ Cn<<-list(C)
 Rn<<-list(R)
 Collapse_Regime_Child(R,C,RC)
 
-delete_indicies=c()
-for (i in 1:(length(Cn))) {
-  
-  if(1 %in% Cn[[i]][[1]]){delete_indicies=c(delete_indicies,i)}
-  if(2 %in% Cn[[i]][[2]]){delete_indicies=c(delete_indicies,i)}
-
-}
-Cn<<-Cn[-c(unique(delete_indicies))]
-Rn<<-Rn[-c(unique(delete_indicies)) ]
+# delete_indicies=c()
+# for (i in 1:(length(Cn))) {
+#   
+#   if(1 %in% Cn[[i]][[1]]){delete_indicies=c(delete_indicies,i)}
+#   if(2 %in% Cn[[i]][[2]]){delete_indicies=c(delete_indicies,i)}
+# 
+# }
+# Cn<<-Cn[-c(unique(delete_indicies))]
+# Rn<<-Rn[-c(unique(delete_indicies)) ]
 #Finding R and C which maximise the posterior distribution #L9
 #structure learning for each (R,C) pair
 
