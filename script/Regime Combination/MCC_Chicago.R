@@ -149,7 +149,7 @@ for (i in 1:no_of_test_dataset) {
   
 }
 capture.output(Synth_Whole_H2,file='~/Desktop/GBN-Regime-in-Basketball/data/Chicago_Bulls/Synthetic/H2.csv')
-rm(list=c('Synth_D_H2','Synth_Whole_H2'))
+#rm(list=c('Synth_D_H2','Synth_Whole_H2'))
 
 ##############Synthetic Dataset Hypothesis 3
 

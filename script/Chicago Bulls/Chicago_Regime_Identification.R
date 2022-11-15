@@ -44,7 +44,7 @@ write.csv(df_chicago,'~/Desktop/GBN-Regime-in-Basketball/data/Chicago_Bulls/Proc
 
 source('~/Desktop/GBN-Regime-in-Basketball/script/Regime Identification/Identify_hc.R')
 start_time<-Sys.time()
-Identify_Positions_hc(data = df_chicago[,-c(1)],k=4,n_iteration = 10000)
+Identify_Positions_hc(data = df_chicago[,-c(1)],k=4,n_iteration = 1000)
 end_time<-Sys.time()
 cat('time taken: ',end_time-start_time)
 
