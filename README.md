@@ -15,7 +15,7 @@ Data courtesy of **Sports Reference LLC** under creative commons licence, [Baske
 
 
 # References :
-1. Marcus Bendtsen. “Regimes in baseball players’ career data.” In: Data Mining Knowledge Discovery 31.6 (2016), pp. 1580–1621. ISSN:13845810.[URL](https://link.springer.com/content/pdf/10.1007/s10618-017-0510-5.pdf).
+1. Marcus Bendtsen. “Regimes in baseball players’ career data.” In: Data Mining Knowledge Discovery 31.6 (2016), pp. 1580–1621. ISSN:13845810.URL: https://link.springer.com/content/pdf/10.1007/s10618-017-0510-5.pdf.
 2. Scott M Lundberg and Su-In Lee. “A unified approach to interpreting model predictions”. In: Advances in neural information processing systems 30 (2017).
 3. Thomas Page. “Applications of wearable technology in elite sports”. In: i-manager’s Journal on Mobile Applications and Technologies 2.1 (2015), p.1.
 4. Roland Lazenby and Olivier Bougard. Michael Jordan: The life. Talent sport, 2015.
@@ -39,12 +39,12 @@ Data courtesy of **Sports Reference LLC** under creative commons licence, [Baske
 22. Marco Scutari. “Learning Bayesian Networks with the bnlearn R Package”. In: Journal of Statistical Software 35.3 (2010), pp. 1–22. DOI: 10.18637/jss.v035.i03. URL: https://www.jstatsoft.org/index.php/jss/article/view/v035i03.
 23. David Heckerman. “A Tutorial on Learning with Bayesian Networks”. In: Innovations in Bayesian Networks: Theory and Applications. Ed. by Dawn E. Holmes and Lakhmi C. Jain. Berlin, Heidelberg: Springer Berlin Heidelberg, 2008, pp. 33–82. ISBN: 978-3-540-85066-3. DOI: 10.1007/978- 3- 540- 85066- 3_3. URL: https://doi.org/10.1007/978-3-540-85066-3_3.
 24. Ioannis Tsamardinos, Laura E Brown, and Constantin F Aliferis. “The max-min hill climbing Bayesian network structure learning algorithm”. In: Machine learning 65.1(2006), pp. 31–78.
-25. Herbert S. Wilf. “Chapter 1 - Introductory Ideas and Examples”. In: Generatingfunctionology. Ed. by Herbert S. Wilf. Academic Press, 1990, pp. 1–26. ISBN: 978-0-12-751955-5. DOI: https ://doi.org/10.1016/ B978-0-12-751955-5.50004-6. URL: https://www.sciencedirect.com/science/article/pii /B9780127519555500046.
+25. Herbert S. Wilf. “Chapter 1 - Introductory Ideas and Examples”. In: Generatingfunctionology. Ed. by Herbert S. Wilf. Academic Press, 1990, pp. 1–26. ISBN: 978-0-12-751955-5. DOI: https ://doi.org/10.1016/ B978-0-12-751955-5.50004-6. URL: https://www.sciencedirect.com/science/article/pii/B9780127519555500046.
 26. Marcus Bendtsen and Jose M Peña. “Gated Bayesian Networks”. In: Twelfth Scandinavian Conference on Artificial Intelligence: SCAI 2013. Vol. 257. IOS Press. 2013, p. 35.
 27. Marcus Bendtsen and Jose M. Peña. “Gated Bayesian networks for algorithmic trading.” In: International Journal of Approximate Reasoning 69 (2016), pp. 58–80. ISSN: 0888-613X.
 28. Stéphane Alarie, Charles Audet, Aımen E Gheribi, Michael Kokkolaras, and Sébastien Le Digabel. “Two decades of blackbox optimization applications”. In: EURO Journal on Computational Optimization 9 (2021), p. 100011.
 29. Christopher KI Williams and Carl Edward Rasmussen. Gaussian processes for machine learning. Vol. 2. 3. MIT press Cambridge, MA, 2006.
-30. Kilian Weinberger. "Lecture 15: Gaussian Processes". https://www.cs.cornell.edu /courses/cs4780/2018fa/lectures/lecturenote15. html. Accessed:2022-11-11. 2018.
+30. Kilian Weinberger. "Lecture 15: Gaussian Processes". https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote15. html. Accessed:2022-11-11. 2018.
 31. E Brochu, V Cora, and N de Freitas. A Tutorial on Bayesian Optimization of Expensive Cost Functions‚ with Application to Active User Modeling and Hierarchical Reinforcement Learning. Tech. rep. 2009. URL: https://ora.ox.ac.uk/objects/uuid:9e6c9666-5641-4924-b9e7-4b768a96f50b.
 32. NBA Media Ventures LLC. NBA Rulebook 2019-20. 2020. URL: https://official.nba.com/rulebook/.
 33. Paola Zuccolotto, Marica Manisera, and Marco Sandri. “Alley-oop! Basketball analytics
