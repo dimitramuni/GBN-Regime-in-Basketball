@@ -2,13 +2,11 @@
 **An implementation of Gated Bayesian Network for Basketball Team**
 
 # Abstract :
-In a dynamic sport of professional basketball, a team may encounter several tangible and intangible alteration, regime detection, a widely used in the domain of financial market decision making and medical treatment planning, may assist a team management personnel to gain insight into how a team is changing with passage of time based on historical data. In this project, we have explored how multiple Bayesian networks could model the dynamics for a certain time frame. We have utilised basketball records starting from season 1980-81 to season 2000-21 for two NBA teams, Chicago Bulls and Detroit Pistons. Our finding have been visualised along with historical evidence which help provide insight into which parameter may be important for a certain period of team history.
+In the dynamic sport of professional basketball, a team may encounter several tangible and intangible alterations over a period of time. Regime detection, a widely used method in the domain of financial market decision-making and medical treatment planning, may assist a team management personnel to gain insight into how a team is changing with time based on historical data\footnote{The similar study has been conducted by (Bendtsen M., 2017) for the career trajectories of the baseball players. \url{https://link.springer.com/article/10.1007/s10618-017-0510-5}}. In this project, we have explored how multiple Bayesian networks could model the dynamics for a certain time frame. We have utilised basketball records starting from season 1983-84 to season 2020-21 for the NBA team Chicago Bulls. First, we identified the most important parameters to describe a team's performance using SHAP\footnote{SHAP: \textbf{SH}apley \textbf{A}dditive ex\textbf{P}lanation} analysis.
+Next, we identify the regimes based on the Metropolis-Hastings MCMC sampling of the posterior distribution of the dataset. After identifying the regimes in the dataset, we hypothesise different regime transition structures and identify the most optimal regime transition structure. Lastly, the optimal regime transition structure is used to create a Gated Bayesian network (GBN) and parameterise the GBN using Gaussian processes distribution. We discuss the limitations of this approach and our work. 
+Our finding has been visualised along with historical evidence, which helps to provide insight into which parameter may be important for a certain period of history and its possible application for the team officials. \\ \\
+\textbf{Keywords:} probabilistic modelling, SHAP analysis, Shapley Values, Bayesian network, directed acyclic graphs, basketball analytics, gated Bayesian network, regime-based analysis, gaussian processes optimisation, hill climbing, NBA, Chicago Bulls
 
-
-**Keywords** : probabilistic modeling; basketball analytics; gated Bayesian network; regime based analysis
-
-
-* This project is based on 732A64 Master's Thesis course at Linköping University during HT1 and HT2 2021.
 
 
 # Data :
