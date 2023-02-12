@@ -15,8 +15,8 @@ Data courtesy of **Sports Reference LLC** under creative commons licence, [Baske
 
 
 # References :
-[1] Marcus Bendtsen. “Regimes in baseball players’ career data.” In: Data Mining Knowledge Discovery 31.6 (2016), pp. 1580–1621. ISSN: 13845810. [URL](https://link.springer.com/content/pdf/10.1007/s10618-017-0510-5.pdf).
-[2] Scott M Lundberg and Su-In Lee. “A unified approach to interpreting model predictions”. In: Advances in neural information processing systems 30 (2017).
+1. Marcus Bendtsen. “Regimes in baseball players’ career data.” In: Data Mining Knowledge Discovery 31.6 (2016), pp. 1580–1621. ISSN:13845810.[URL](https://link.springer.com/content/pdf/10.1007/s10618-017-0510-5.pdf).
+2. Scott M Lundberg and Su-In Lee. “A unified approach to interpreting model predictions”. In: Advances in neural information processing systems 30 (2017).
 [3] Thomas Page. “Applications of wearable technology in elite sports”. In: i-manager’s Journal on Mobile Applications and Technologies 2.1 (2015), p.1.
 [4] Roland Lazenby and Olivier Bougard. Michael Jordan: The life. Talent sport, 2015.
 [5] Kerry Eggers. Jail blazers: How the Portland Trail Blazers became the bad boys of basketball Sports Publishing, 2021.
