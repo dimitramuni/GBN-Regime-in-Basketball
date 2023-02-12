@@ -1,9 +1,9 @@
 #Beta Proposal Values using equation 7 to 11
 
 #k is maximum number of transitions
-#k=2
-#n=39
-#current_betas=c(1,39)
+k=3
+n=29
+#current_betas=c(11,18,25)
 
 
 propose_betas<-function(current_betas,n,k){ 
@@ -106,11 +106,11 @@ propose_betas<-function(current_betas,n,k){
   }
 
  #Plotting the distribution  
-#plot(x=beta_probabilities$x,
-#     y=beta_probabilities$y,xlab = expression(paste('Proposal ',beta[i],'*')),
-#     ylab=expression(paste("Conditional Probability p( ",
-#                           beta[i],"*|",beta[i],")")))  
- 
+plot(x=beta_probabilities$x,
+     y=beta_probabilities$y,xlab = expression(paste('Proposal ',beta[j],'*')),
+     ylab=expression(paste("Conditional Probability p( ",
+                           beta[j],"*|",beta[j],")")),col=ifelse(beta_probabilities$x %in% current_betas,'red','black'),lty=2,type='b',pch=19)  
+legend(c('topleft'),c(expression(paste(beta[j])),expression(paste(beta[j],'*'))),col=c('red','black'),pch=19)
  #print(beta_probabilities)
  #sorting betas according to corresponding probability
  #beta_sorted=order(beta_probabilities$y,decreasing = T)
@@ -124,7 +124,10 @@ return(beta_probabilities)
 }
 #propose_betas(current_betas=c(10,30),n=39,k=2)
 #propose_betas(current_betas=c(1,39),n=39,k=2)
-propose_betas(current_betas=c(15,25),n=39,k=2)
+propose_betas(current_betas=c(11,18,25),n=29,k=3)
+#propose_betas(current_betas=c(1,14,29),n=29,k=3)
 #propose_betas(current_betas=c(19,21),n=39,k=2)
 #propose_betas(current_betas=c(10,20,40,50),n=60,k=2)
+propose_betas(current_betas=c(5,24,29),n=29,k=3)
+propose_betas(current_betas=c(12,15,18),n=29,k=3)
 #n-k+1 possible betas

@@ -28,7 +28,7 @@ Loglikelihood_Calculation_hc<-function(dataset){
                                        
   #Learning Bayesian Network using Hill Climbing Algorithm
   #bn<-hc(x=dataset,score = 'bde')
-  bn<-hc(x=dataset,score = 'bde', optimized = TRUE)
+  bn<-hc(x=dataset,score = 'bde')
   #Bayesian Dirichilet Equivalent score
   BDE_score<-bnlearn::score(bn, dataset, type = "bde")
   return(BDE_score)
@@ -198,7 +198,7 @@ Identify_Positions_hc<-function(data,k,n_iteration){
     
     if(iteration==n_iteration){break}         #L43
   }
-  if(iteration %in% c(10000,20000,30000,40000,50000,60000,70000,80000,90000)){cat('\niteration',iteration)}
+  if(iteration %in% c(10,20,100)){cat('\niteration',iteration)}
   
   ##Finding nonzero deltas #L45
   

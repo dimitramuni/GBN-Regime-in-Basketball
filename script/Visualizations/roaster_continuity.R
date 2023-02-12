@@ -15,8 +15,9 @@ chicago<-barplot(roster_changes$CHI~roster_changes$Season,las=3,cex.names=0.7,yl
         main="Roster Continuity for the Chicago Bulls",xlab="NBA Season",ylab="% Continuity in Roster in Comparision to Previous Season",
         col=c(rep(8,3),rep(3,3),4,rep(5,2),2,2,2,4,4,2,2,2,rep(8,6),3,3,4,8,3,3,5,3,4,3,4,8,3,rep(8,4))) 
 grid(col = 'gray')
-legend('topright',c('Championship Final','Eastern Conference Final','Eastern Conference Semi-Final','Eastern Conference 1st Round','Not Qualified for the play-offs'),
-       col = c(2,5,4,3,8),lwd=2,cex = 0.5)
+abline(h=0.5,col='purple')
+legend('topright',c('Championship Final','Eastern Conference Final','Eastern Conference Semi-Final','Eastern Conference 1st Round','Not Qualified for the play-offs','50% Roster Continuity'),
+       col = c(2,5,4,3,8,'purple'),lwd=2,cex = 0.5)
 
 
 cleveland<-barplot(roster_changes$CLE~roster_changes$Season,las=3,cex.names=0.5,ylim=c(0.0,1.0),

@@ -14,7 +14,7 @@ chicago_scores=read.csv('~/Desktop/GBN-Regime-in-Basketball/data/Chicago_Bulls/P
 dataset=chicago_scores[,-c(1)]
 dataset<-as.data.frame(unclass(dataset),stringsAsFactors = TRUE)
 
-nonzero_delta_from_Identify<-c(604,808,1400,2417)
+nonzero_delta_from_Identify<-c(390,930,1695,2689)
 n=dim(dataset)[1]
 d=numeric(length = length(nonzero_delta_from_Identify))
 d[1]=nonzero_delta_from_Identify[1]
@@ -103,7 +103,7 @@ for(i in 1:length(H)){
   for (j in 1:length(H[[i]])) {
     
     bn=hc(H[[i]][[j]],score = 'bde') 
-    marg_bn=c(marg_bn,score(bn,H[[i]][[j]],type = "bde"))
+    marg_bn=c(marg_bn,bnlearn::score(bn,H[[i]][[j]],type = "bde"))
   }
   marglik_h=c(marglik_h,sum(marg_bn))
 }
@@ -129,8 +129,15 @@ for (i in 1:no_of_test_dataset) {
   
 }
 
-capture.output(Synth_Whole_H1,file='~/Desktop/GBN-Regime-in-Basketball/data/Chicago_Bulls/Synthetic/H1.csv')
-rm(list=c('Synth_D_H1','Synth_Whole_H1'))
+source('~/Desktop/GBN-Regime-in-Basketball/script/Regime Identification/Identify_hc.R')
+start_time<-Sys.time()
+Identify_Positions_hc(data = Synth_Whole_H1[[2]],k=4,n_iteration =10000)
+end_time<-Sys.time()
+cat('time taken: ',end_time-start_time)
+
+
+#capture.output(Synth_Whole_H1,file='~/Desktop/GBN-Regime-in-Basketball/data/Chicago_Bulls/Synthetic/H1.csv')
+#rm(list=c('Synth_D_H1','Synth_Whole_H1'))
 
 ##############Synthetic Dataset Hypothesis 2
 

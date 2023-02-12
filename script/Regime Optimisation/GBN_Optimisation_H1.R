@@ -22,13 +22,15 @@ for (i in 1:nRegimes) {
   #BN<-hc(R[[i]],score = 'bde')
   #GBN[[i]]<-as.grain(bn.fit(BN,data=R[[i]]))
   BN[[i]]<-hc(D[[i]],score = 'bde')
+  Rgraphviz::plot(BN[[i]])
+  
 }
 
 #lookback window length, intial choice #L3
-tau=5
+tau=15
 
 #Value of threshold for the gates, initial choice
-theta=1.5
+theta=22
 
 #number of resamples #L5
 
@@ -37,7 +39,7 @@ nBayesOptimiseIteration=100
 
 
 #exploration-exploitation tradeoff coefficient
-eta=10
+eta=5
 
 Lambda<-matrix(nrow = nBayesOptimiseIteration,ncol=2) #Container for parameteres #L14
 colnames(Lambda)<-c('Tau','Theta')
@@ -51,7 +53,7 @@ calc_accuracy<-function(tau,theta){
   #print(nResample)
 
   for(resample in nResample){
-    #as we are looking at hypothesis 7
+    #as we are looking at hypothesis 1
     n_regimes<-1:4
     for (regime  in n_regimes) {
       n<-dim(Synth_D_H1[[resample]][[regime]])[1]
@@ -82,7 +84,7 @@ calc_accuracy<-function(tau,theta){
 
 
 test_tau=round(seq(5,50,length.out = 20))
-test_theta=seq(0.15,15,length.out = 20)
+test_theta=seq(1.5,150,length.out = 20)
 Xtest<-expand.grid(test_tau,test_theta)
 X<-matrix(data=c(tau,theta),ncol=2)
 
@@ -98,12 +100,12 @@ for (n_iter in 1:nBayesOptimiseIteration ){
   D_xtx<-laGP::distance(Xtest,X)
   D_xtxt<-laGP::distance(Xtest,Xtest)
   
-  c<-0.5
-  sigma_F<-5
-  k_xx<-sigma_F*exp(-c*D_xx)
-  k_xxt<-sigma_F*exp(-c*D_xxt)
-  k_xtx<-sigma_F*exp(-c*D_xtx)
-  k_xtxt<-sigma_F*exp(-c*D_xtxt)
+  l<-1
+  sigma_F<-50
+  k_xx<-sigma_F*exp(-((D_xx)/(2*l*l)))
+  k_xxt<-sigma_F*exp(-((D_xxt)/(2*l*l)))
+  k_xtx<-sigma_F*exp(-((D_xtx)/(2*l*l)))
+  k_xtxt<-sigma_F*exp(-((D_xtxt)/(2*l*l)))
   
   mu<-k_xtx%*%solve(k_xx)%*%f[1:n_iter]
   var<-k_xtxt-(k_xtx%*%solve(k_xx)%*%k_xxt)
@@ -125,6 +127,6 @@ for (n_iter in 1:nBayesOptimiseIteration ){
 }
 
 
-
-
+#gbn_opt4<-list('eta'=eta,'accuracy'=f,'tau_theta'=Lambda)
+#capture.output(gbn_opt4,file='~/Desktop/GBN-Regime-in-Basketball/results/GBN_Optimisation/gbn_opt4.csv')
 
