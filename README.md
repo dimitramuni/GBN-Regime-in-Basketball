@@ -13,7 +13,8 @@ Keywords: probabilistic modelling, SHAP analysis, Shapley Values, Bayesian netwo
 # Data :
 Data courtesy of **Sports Reference LLC** under creative commons licence, [Basketball-Reference.com](https://www.basketball-reference.com/) -Basketball Statistics and History. 
 
-
+# Discussion : 
+!(Roster Continuity Chicago)[~/Desktop/GBN-Regime-in-Basketball/results/chicago_roster_continuity.png]
 # References :
 1. Marcus Bendtsen. “Regimes in baseball players’ career data.” In: Data Mining Knowledge Discovery 31.6 (2016), pp. 1580–1621. ISSN:13845810.URL: https://link.springer.com/content/pdf/10.1007/s10618-017-0510-5.pdf.
 2. Scott M Lundberg and Su-In Lee. “A unified approach to interpreting model predictions”. In: Advances in neural information processing systems 30 (2017).
@@ -59,3 +60,4 @@ in R”. In: Significance 18.2 (2021), pp.26–31.URL:https://rss.onlinelibrary.
 41. Thomas M Wagner, Alexander Benlian, and Thomas Hess. “Converting freemium customers from free to premium—the role of the perceived premium fit in the case of music as a service”. In: Electronic Markets 24.4 (2014), pp. 259–268.
 42. James Cussens and Mark Bartlett. GOBNILP: Globally Optimal Bayesian Network learning using Integer Linear Programming. English. 2013.
 43. Mauro Scanagatta, Antonio Salmerón, and Fabio Stella. “A survey on Bayesian network structure learning from data”. In: Progress in Artificial Intelligence 8.4 (2019), pp. 425–439.
+
