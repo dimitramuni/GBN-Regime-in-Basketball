@@ -11,10 +11,10 @@ Keywords: probabilistic modelling, SHAP analysis, Shapley Values, Bayesian netwo
 
 
 # Data :
-Data courtesy of **Sports Reference LLC** under creative commons licence, [Basketball-Reference.com](https://www.basketball-reference.com/) -Basketball Statistics and History. 
+Data courtesy of **Sports Reference LLC** under creative commons licence, [Basketball-Reference](https://www.basketball-reference.com/) -Basketball Statistics and History. 
 
 # Discussion : 
-!(Roster Continuity Chicago)[~/Desktop/GBN-Regime-in-Basketball/results/roster_continuity/chicago_roster_continuity.png]
+![Roster Continuity Chicago](~/Desktop/GBN-Regime-in-Basketball/results/roster_continuity/chicago_roster_continuity.png)
 
 # References :
 1. Marcus Bendtsen. “Regimes in baseball players’ career data.” In: Data Mining Knowledge Discovery 31.6 (2016), pp. 1580–1621. ISSN:13845810.URL: https://link.springer.com/content/pdf/10.1007/s10618-017-0510-5.pdf.
