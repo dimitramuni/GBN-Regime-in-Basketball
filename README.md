@@ -15,21 +15,21 @@ Data courtesy of **Sports Reference LLC** under creative commons licence, [Baske
 
 # Methodology:
 
-- Regime Identification
+## Regime Identification
 ![Regime ID](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/diagrams/Regime_Identification.png)
 
-- Structure Combination
+## Structure Combination
 ![Structure Combination](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/diagrams/Structural-Combination-Granular.png)
 
 # Discussion : 
 
-- Roster Continuity
+## Roster Continuity
  ![Roster Continuity Chicago](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/164d44504dd034ad62513b0086cfcd9feea95aeb/results/roster_continuity/chicago_roster_continuity.png)
  
- - Gated bayesian Network for Chicago Bulls
+## Gated bayesian Network for Chicago Bulls
  ![GBN]()
  
- - Trends in 3 Points Attempt with Time
+## Trends in 3 Points Attempt with Time
  ![3PA](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/3PA_season.png)
  
  - Heatmap for Chicago Bulls 
