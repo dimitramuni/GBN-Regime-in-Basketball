@@ -2,39 +2,26 @@
 **An implementation of Gated Bayesian Network for Basketball Team**
 
 # Abstract :
-In the dynamic sport of professional basketball, a team may encounter several tangible and intangible alterations over a period of time. Regime detection, a widely used method in the domain of financial market decision-making and medical treatment planning, may assist a team management personnel to gain insight into how a team is changing with time based on historical data. The similar study has been conducted by [(Bendtsen M., 2017)](https://link.springer.com/article/10.1007/s10618-017-0510-5) for the career trajectories of the baseball players . In this project, we have explored how multiple Bayesian networks could model the dynamics for a certain time frame. We have utilised basketball records starting from season 1983-84 to season 2020-21 for the NBA team Chicago Bulls. First, we identified the most important parameters to describe a team's performance using SHAP (**SH**apley **A**dditive ex**P**lanation) analysis.
-Next, we identify the regimes based on the Metropolis-Hastings MCMC sampling of the posterior distribution of the dataset. After identifying the regimes in the dataset, we hypothesise different regime transition structures and identify the most optimal regime transition structure. Lastly, the optimal regime transition structure is used to create a Gated Bayesian network (GBN) and parameterise the GBN using Gaussian processes distribution. We discuss the limitations of this approach and our work. 
-Our finding has been visualised along with historical evidence, which helps to provide insight into which parameter may be important for a certain period of history and its possible application for the team officials.
+In the dynamic sport of professional basketball, a team may encounter several tangible and intangible alterations over a period of time. Regime detection, a widely used method in the domain of financial market decision-making and medical treatment planning, may assist a team management personnel to gain insight into how a team is changing with time based on historical data. The similar study has been conducted by [(Bendtsen M., 2017)](https://link.springer.com/article/10.1007/s10618-017-0510-5) for the career trajectories of the baseball players . In this project, we have explored how multiple Bayesian networks could model the dynamics for a certain time frame. We have utilised basketball records starting from season 1983-84 to season 2020-21 for the NBA team Chicago Bulls. First, we identified the most important parameters to describe a team's performance using SHAP (**SH**apley **A**dditive ex**P**lanation) analysis. Next, we identify the regimes based on the Metropolis-Hastings MCMC sampling of the posterior distribution of the dataset. After identifying the regimes in the dataset, we hypothesise different regime transition structures and identify the most optimal regime transition structure. Lastly, the optimal regime transition structure is used to create a Gated Bayesian network (GBN) and parameterise the GBN using Gaussian processes distribution. We discuss the limitations of this approach and our work.Our finding has been visualised along with historical evidence, which helps to provide insight into which parameter may be important for a certain period of history and its possible application for the team officials.
 
 Keywords: probabilistic modelling, SHAP analysis, Shapley Values, Bayesian network, directed acyclic graphs, basketball analytics, gated Bayesian network, regime-based analysis, gaussian processes optimisation, hill climbing, NBA, Chicago Bulls
 
 # Problem Statement
-The overall purpose of this Master Project is to explore the usage of the Gated Bayesian Net-
-work to evaluate the performance of a professional basketball team through history, which
-could provide important insight into a team’s playing dynamics for the coach and other team
-strategists. The on-court combating quality of a basketball team could be measured from
-many aspects. The apparent intention is to find out if we could use the gated-Bayesian net-
-work, which was used previously by [Bendtsen (2016)](https://link.springer.com/content/pdf/10.1007/s10618-017-0510-5.pdf) to assess the change of regimes of baseball players through their careers.
+The overall purpose of this Master Project is to explore the usage of the Gated Bayesian Network to evaluate the performance of a professional basketball team through history, which
+could provide important insight into a team’s playing dynamics for the coach and other team strategists. The on-court combating quality of a basketball team could be measured from
+many aspects. The apparent intention is to find out if we could use the gated-Bayesian network, which was used previously by [Bendtsen (2016)](https://link.springer.com/content/pdf/10.1007/s10618-017-0510-5.pdf) to assess the change of regimes of baseball players through their careers.
 
 ## Research Objectives
 The following three research objectives are thoroughly addressed in this degree project work.
 We list the research objectives as follows,
-1. Explore the essential features from the historical basketball data that significantly im-
-pact the team’s performance.
-2. Scruitinse the applicability of the Gated Bayesian Network framework to the basketball
-data to learn the performance dynamics of a team.
-3. Validate whether the aforementioned framework enhanced the understanding of a
-team’s dynamics using statistical measures and historical evidence.
+1. Explore the essential features from the historical basketball data that significantly impact the team’s performance.
+2. Scruitinse the applicability of the Gated Bayesian Network framework to the basketball data to learn the performance dynamics of a team.
+3. Validate whether the aforementioned framework enhanced the understanding of a team’s dynamics using statistical measures and historical evidence.
 
 ## Scopes of the Master Project
-The scope of this Master Project is bound to scrutinise the performance statistics of the NBA
-team Chicago Bulls between the seasons 1983-84 to 2020-21. Furthermore, in this analysis,
-each regular season, we consider that the individual team plays during 82 games, excluding
-the playoffs games. The reason for such a consideration is primarily because teams play
-quite differently in the playoffs than in the regular season, so the same model would not be
-an apt choice. Additionally, the non-commercial data is utilised in this project available on
-the basketball-reference website at gratis. Lastly, the model described in this discourse
-is insensitive to the alteration in the NBA regulations over the decades.
+The scope of this Master Project is bound to scrutinise the performance statistics of the NBA team Chicago Bulls between the seasons 1983-84 to 2020-21. Furthermore, in this analysis,
+each regular season, we consider that the individual team plays during 82 games, excluding the playoffs games. The reason for such a consideration is primarily because teams play
+quite differently in the playoffs than in the regular season, so the same model would not be an apt choice. Additionally, the non-commercial data is utilised in this project available on the basketball-reference website at gratis. Lastly, the model described in this discourse is insensitive to the alteration in the NBA regulations over the decades.
 
 
 # Data :
