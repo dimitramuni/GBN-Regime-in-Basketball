@@ -13,8 +13,27 @@ Keywords: probabilistic modelling, SHAP analysis, Shapley Values, Bayesian netwo
 # Data :
 Data courtesy of **Sports Reference LLC** under creative commons licence, [Basketball-Reference](https://www.basketball-reference.com/) -Basketball Statistics and History. 
 
+# Methodology:
+
+- Regime Identification
+![Regime ID](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/diagrams/Regime_Identification.png)
+
+- Structure Combination
+![Structure Combination](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/diagrams/Structural-Combination-Granular.png)
+
 # Discussion : 
-![Roster Continuity Chicago](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/164d44504dd034ad62513b0086cfcd9feea95aeb/results/roster_continuity/chicago_roster_continuity.png)
+
+- Roster Continuity
+ ![Roster Continuity Chicago](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/164d44504dd034ad62513b0086cfcd9feea95aeb/results/roster_continuity/chicago_roster_continuity.png)
+ 
+ - Gated bayesian Network for Chicago Bulls
+ ![GBN]()
+ 
+ - Trends in 3 Points Attempt with Time
+ ![3PA](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/3PA_season.png)
+ 
+ - Heatmap for Chicago Bulls 
+ ![Heatmap](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/chicago_heatmap.png)
 
 # References :
 1. Marcus Bendtsen. “Regimes in baseball players’ career data.” In: Data Mining Knowledge Discovery 31.6 (2016), pp. 1580–1621. ISSN:13845810.URL: https://link.springer.com/content/pdf/10.1007/s10618-017-0510-5.pdf.
