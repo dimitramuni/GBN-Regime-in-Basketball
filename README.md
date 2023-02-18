@@ -61,26 +61,12 @@ The dataset used in the experiment is composed of raw data and processed data as
 
 
 |External Influences|Player’s Contribution|Team’s Overall Performance|
-|:---: |:---:|:---:|
+|:---:|:---:|:---:|
 |Home_Game|Continuing_Players_WS|Team_Prospect|
 |Opponent_PlayOff| Incoming_Players_WS|WinsInLast15|
 |Days_Between_Games|Leaving_Players_WS| WinsInLast10|
 ||WinsInLast5|
 
-
-
-
-
-
-
-
-
-
-=======
-|Tm, Opp, FG, FGA, FG%, 3P, 3PA, 3P%, FT, FTA,|Tm, Opp, ORtg, DRtg, Pace, FTr, 3PAr,TS%, TRB%, AST%, STL%, BLK%|
-|FT%, ORB, DRB, TRB, AST, STL, BLK, TOV, PF|eFG%, TOV%, ORB%, FT/FGA (Offensive Four Factors) |
-||eFG%, TOV%, DRB%, FT/FGA (Defensive Four Factors)|
->>>>>>> 41b9a5db479811f3b94953afb34b3cd4c0701fa0
 
 
 ## Trends in 3 Points Attempt with Time
