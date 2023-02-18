@@ -52,7 +52,6 @@ The dataset used in the experiment is composed of raw data and processed data as
 
 |Regular Box Score| Advanced Box Score|
 |:---: |:---:|
-<<<<<<< HEAD
 |Tm, Opp, FG, FGA, FG%, 3P, 3PA, 3P%|Tm, Opp, ORtg, DRtg, Pace, FTr, 3PAr,TS%, TRB%, AST%, STL%, BLK%|
 |FT, FTA, FT%, ORB, DRB, TRB |eFG%, TOV%, ORB%, FT/FGA (Offensive Four Factors) |
 |AST, STL, BLK, TOV, PF|eFG%, TOV%, DRB%, FT/FGA (Defensive Four Factors)|
@@ -65,7 +64,7 @@ The dataset used in the experiment is composed of raw data and processed data as
 |Home_Game|Continuing_Players_WS|Team_Prospect|
 |Opponent_PlayOff| Incoming_Players_WS|WinsInLast15|
 |Days_Between_Games|Leaving_Players_WS| WinsInLast10|
-||WinsInLast5|
+|||WinsInLast5|
 
 
 
