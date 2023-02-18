@@ -64,24 +64,19 @@ The dataset used in the experiment is composed of raw data and processed data as
 |FT/FGA| Free Throw per Free Goal Attempt|
 ## Raw Data
 
-Type of Features| Features
-:---: |:---:|
-|Tm, Opp, FG, FGA, FG%, 3P, 3PA, 3P%, FT, FTA,|
-^^Regular BoxScore| FT%, ORB, DRB, TRB, AST, STL, BLK, TOV, PF|
-^^|Tm, Opp, ORtg, DRtg, Pace, FTr, 3PAr|
+|Type of Features| Features|
+|:---: |:---:|
+||Tm, Opp, FG, FGA, FG%, 3P, 3PA, 3P%, FT, FTA,|
+|Regular BoxScore| FT%, ORB, DRB, TRB, AST, STL, BLK, TOV, PF|
+||Tm, Opp, ORtg, DRtg, Pace, FTr, 3PAr|
 |TS%, TRB%, AST%, STL%, BLK%|
-^^ Advanced BoxScore |eFG%, TOV%, ORB%, FT/FGA (Offensive Four Factors)|
-^^|eFG%, TOV%, DRB%, FT/FGA (Defensive Four Factors)|
+|Advanced BoxScore |eFG%, TOV%, ORB%, FT/FGA (Offensive Four Factors)|
+||eFG%, TOV%, DRB%, FT/FGA (Defensive Four Factors)|
 
 ## Trends in 3 Points Attempt with Time
  ![3PA](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/3PA_season.png)
  
-| Column 1 | Column 2 | Column 3 |
-| --- | --- | --- |
-| A1 | B1 | C1 |
-| A2 | B2 | C2 |
-|  | B3 | C3 |
-| A4 | B4 | C4 |
+
 
 ## Heatmap for Chicago Bulls 
  ![Heatmap](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/chicago_heatmap.png)
