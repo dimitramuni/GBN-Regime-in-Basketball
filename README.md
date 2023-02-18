@@ -28,40 +28,40 @@ quite differently in the playoffs than in the regular season, so the same model 
 Data courtesy of **Sports Reference LLC** under creative commons licence, [Basketball-Reference](https://www.basketball-reference.com/) -Basketball Statistics and History. 
 The dataset used in the experiment is composed of raw data and processed data as explained below:
 
-|Term | Description|
+|Term|Description|
 | ----------- | ----------- |
-|FG | Field Goal|
-|FGA | Field Goal Attempts|
-|FG% |Field Goal Percentage|
-|3P |3 Point Goals|
-|3PA |3 Points Goal Attempted|
-|3P% |3 Points Goal Percentage|
-|FT |Free Throw|
-|FTA |Free Throw Attempts|
-|FT% |Free Throw Percentage|
-|ORB |Offensive Rebound|
-|DRB |Defensive Rebound|
-|TRB |Total Rebound|
-|AST |Assist|
-|STL |Steal|
-|BLK |Block|
-|TOV |Turnover|
-|PF |Personal Fouls|
-|ORtg |Offensive Ratings|
-|DRtg |Defensive Ratings|
-|Pace |Pace Factor|
-|FTr |Free Throw Attempt Rate|
-|3PAr |3-Points Attempt Rate|
-|TS% |True Shooting Percentage|
-|TRB% |Total Rebound Percentage|
-|AST% |Assist Percentage|
-|STL% |Steal Percentage|
-|BLK% |Block Percentage|
-|eFG% |Effective Field Goal Percentage|
-|TOV% | Turnover Percentage|
-|ORB% | Offensive Rebound Percentage|
-|DRB% | Defensive Rebound Percentage|
-|FT/FGA | Free Throw per Free Goal Attempt|
+|FG|Field Goal|
+|FGA|Field Goal Attempts|
+|FG%|Field Goal Percentage|
+|3P|3 Point Goals|
+|3PA|3 Points Goal Attempted|
+|3P%|3 Points Goal Percentage|
+|FT|Free Throw|
+|FTA|Free Throw Attempts|
+|FT%|Free Throw Percentage|
+|ORB|Offensive Rebound|
+|DRB|Defensive Rebound|
+|TRB|Total Rebound|
+|AST|Assist|
+|STL|Steal|
+|BLK|Block|
+|TOV|Turnover|
+|PF|Personal Fouls|
+|ORtg|Offensive Ratings|
+|DRtg|Defensive Ratings|
+|Pace|Pace Factor|
+|FTr|Free Throw Attempt Rate|
+|3PAr|3-Points Attempt Rate|
+|TS%|True Shooting Percentage|
+|TRB%|Total Rebound Percentage|
+|AST%|Assist Percentage|
+|STL%|Steal Percentage|
+|BLK%|Block Percentage|
+|eFG%|Effective Field Goal Percentage|
+|TOV%| Turnover Percentage|
+|ORB%| Offensive Rebound Percentage|
+|DRB%| Defensive Rebound Percentage|
+|FT/FGA| Free Throw per Free Goal Attempt|
 - Raw Data
 
 ## Trends in 3 Points Attempt with Time
