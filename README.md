@@ -26,8 +26,42 @@ quite differently in the playoffs than in the regular season, so the same model 
 
 # Data :
 Data courtesy of **Sports Reference LLC** under creative commons licence, [Basketball-Reference](https://www.basketball-reference.com/) -Basketball Statistics and History. 
+The dataset used in the experiment is composed of raw data and processed data as explained below:
 
-- 
+|Term | Description|
+|FG | Field Goal|
+|FGA | Field Goal Attempts|
+|FG% |Field Goal Percentage|
+|3P |3 Point Goals|
+|3PA |3 Points Goal Attempted|
+|3P% |3 Points Goal Percentage|
+|FT |Free Throw|
+|FTA |Free Throw Attempts|
+|FT% |Free Throw Percentage|
+|ORB |Offensive Rebound|
+|DRB |Defensive Rebound|
+|TRB |Total Rebound|
+|AST |Assist|
+|STL |Steal|
+|BLK |Block|
+|TOV |Turnover|
+|PF |Personal Fouls|
+|ORtg |Offensive Ratings|
+|DRtg |Defensive Ratings|
+|Pace |Pace Factor|
+|FTr |Free Throw Attempt Rate|
+|3PAr |3-Points Attempt Rate|
+|TS% |True Shooting Percentage|
+|TRB% |Total Rebound Percentage|
+|AST% |Assist Percentage|
+|STL% |Steal Percentage|
+|BLK% |Block Percentage|
+|eFG% |Effective Field Goal Percentage|
+|TOV% | Turnover Percentage|
+|ORB% | Offensive Rebound Percentage|
+|DRB% | Defensive Rebound Percentage|
+|FT/FGA | Free Throw per Free Goal Attempt|
+- Raw Data
 
 ## Trends in 3 Points Attempt with Time
  ![3PA](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/3PA_season.png)
@@ -47,10 +81,10 @@ likely a higher correlation between these two events.
 
 - We observed a similar result for another feature WinsInLast10, which accounts for several wins in the last ten games, albeit the feature importance is less than that of WinsInLast15.
 
--The next three most important features are related to the player’s individual contribution. As described previously, the first category of the players are those who are going to continue playing in the next season; these players have a higher impact on the Team_Prospect than the contribution from the players who either have newly joined the team in the current season or the players from the current season who are going to be leaving the team in the
+- The next three most important features are related to the player’s individual contribution. As described previously, the first category of the players are those who are going to continue playing in the next season; these players have a higher impact on the Team_Prospect than the contribution from the players who either have newly joined the team in the current season or the players from the current season who are going to be leaving the team in the
 next season.
 ## Roster Continuity
-- Roster continuity measures the percentage of the current season roster made up of players from the previous season. In this figure, the roster continuity is plotted on the y-axis ranging between 0 to 1 (or 0% to 100%) along with the corresponding season on the x-axis. 
+- *Roster Continuity* measures the percentage of the current season roster made up of players from the previous season. In this figure, the roster continuity is plotted on the y-axis ranging between 0 to 1 (or 0% to 100%) along with the corresponding season on the x-axis. 
 - The season where a team only played in the regular season is marked with grey coloured bars, and when the team is advancing to other levels, such as playing in Conference 1st Round, Conference Semi-Final, Conference Final or Championship Final represented by green, blue, turquoise and red colours accordingly. We can visually observe
 that seasons, where Chicago Bulls had advanced to the Conference Semi-Final or above are described by blue, turquoise and red bars, which correspond to more than 50% roster continuity value (except for season 2010-11 for which roster continuity is 49%), which means that there is a significant correlation between roster stability of a team and team’s performance.
 - Now, if we consider the stability of the roster in terms of players who continue to play in the next season, this would translate into the player’s contribution towards win share.
@@ -58,7 +92,13 @@ that seasons, where Chicago Bulls had advanced to the Conference Semi-Final or a
  
 ## Gated bayesian Network for Chicago Bulls
  ![GBN](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/diagrams/GBN.png)
- 
+
+
+# Ethical Consideration
+
+- The data set utilised here is hosted on the website basketball-reference.com which seems to operate on a combination of ad revenue based *freemium* model, we have only accessed the available data without any cost.
+- We have adhered to the [*Terms of Use*](https://www.sportsreference.com/termsofuse.htm) and [*Information Sharing*](https://www.sports-reference.com/sharing.html) guidelines laid out by the parent company of the data hosting website, Sports Reference LLC, to the best of our knowledge.
+- Primarily, the data is utilised for academic research purposes. Furthermore, the research we conducted here is intended for constructive development in the sports analytics community (if any) without any commercial ambition.
 
 
 # References :
