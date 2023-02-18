@@ -29,7 +29,7 @@ Data courtesy of **Sports Reference LLC** under creative commons licence, [Baske
 The dataset used in the experiment is composed of raw data and processed data as explained below:
 
 |Term|Description||Term|Description|
-|:---: |:---:||:---: |:---:|
+|:---: |:---:|:---:|:---: |:---:|
 |FG|Field Goal||PF|Personal Fouls|
 |FGA|Field Goal Attempts||ORtg|Offensive Ratings|
 |FG%|Field Goal Percentage||DRtg|Defensive Ratings|
