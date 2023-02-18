@@ -42,7 +42,7 @@ Data courtesy of **Sports Reference LLC** under creative commons licence, [Baske
  ![Roster Continuity Chicago](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/164d44504dd034ad62513b0086cfcd9feea95aeb/results/roster_continuity/chicago_roster_continuity.png)
  
 ## Gated bayesian Network for Chicago Bulls
- ![GBN]()
+ ![GBN](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/diagrams/GBN.png)
  
 ## Trends in 3 Points Attempt with Time
  ![3PA](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/3PA_season.png)
