@@ -28,40 +28,26 @@ quite differently in the playoffs than in the regular season, so the same model 
 Data courtesy of **Sports Reference LLC** under creative commons licence, [Basketball-Reference](https://www.basketball-reference.com/) -Basketball Statistics and History. 
 The dataset used in the experiment is composed of raw data and processed data as explained below:
 
-|Term|Description|
-|:---: |:---:|
-|FG|Field Goal|
-|FGA|Field Goal Attempts|
-|FG%|Field Goal Percentage|
-|3P|3 Point Goals|
-|3PA|3 Points Goal Attempted|
-|3P%|3 Points Goal Percentage|
-|FT|Free Throw|
-|FTA|Free Throw Attempts|
-|FT%|Free Throw Percentage|
-|ORB|Offensive Rebound|
-|DRB|Defensive Rebound|
-|TRB|Total Rebound|
-|AST|Assist|
-|STL|Steal|
-|BLK|Block|
-|TOV|Turnover|
-|PF|Personal Fouls|
-|ORtg|Offensive Ratings|
-|DRtg|Defensive Ratings|
-|Pace|Pace Factor|
-|FTr|Free Throw Attempt Rate|
-|3PAr|3-Points Attempt Rate|
-|TS%|True Shooting Percentage|
-|TRB%|Total Rebound Percentage|
-|AST%|Assist Percentage|
-|STL%|Steal Percentage|
-|BLK%|Block Percentage|
-|eFG%|Effective Field Goal Percentage|
-|TOV%| Turnover Percentage|
-|ORB%| Offensive Rebound Percentage|
-|DRB%| Defensive Rebound Percentage|
-|FT/FGA| Free Throw per Free Goal Attempt|
+|Term|Description||Term|Description|
+|:---: |:---:||:---: |:---:|
+|FG|Field Goal||PF|Personal Fouls|
+|FGA|Field Goal Attempts||ORtg|Offensive Ratings|
+|FG%|Field Goal Percentage||DRtg|Defensive Ratings|
+|3P|3 Point Goals||Pace|Pace Factor|
+|3PA|3 Points Goal Attempted||FTr|Free Throw Attempt Rate|
+|3P%|3 Points Goal Percentage||3PAr|3-Points Attempt Rate|
+|FT|Free Throw||TS%|True Shooting Percentage|
+|FTA|Free Throw Attempts||TRB%|Total Rebound Percentage|
+|FT%|Free Throw Percentage||AST%|Assist Percentage|
+|ORB|Offensive Rebound||STL%|Steal Percentage|
+|DRB|Defensive Rebound||BLK%|Block Percentage|
+|TRB|Total Rebound||eFG%|Effective Field Goal Percentage|
+|AST|Assist||TOV%| Turnover Percentage|
+|STL|Steal||ORB%| Offensive Rebound Percentage|
+|BLK|Block||DRB%| Defensive Rebound Percentage|
+|TOV|Turnover||FT/FGA| Free Throw per Free Goal Attempt|
+
+
 ## Raw Data
 
 |Type of Features| Features|
@@ -69,7 +55,7 @@ The dataset used in the experiment is composed of raw data and processed data as
 ||Tm, Opp, FG, FGA, FG%, 3P, 3PA, 3P%, FT, FTA,|
 |Regular BoxScore| FT%, ORB, DRB, TRB, AST, STL, BLK, TOV, PF|
 ||Tm, Opp, ORtg, DRtg, Pace, FTr, 3PAr|
-|TS%, TRB%, AST%, STL%, BLK%|
+||TS%, TRB%, AST%, STL%, BLK%|
 |Advanced BoxScore |eFG%, TOV%, ORB%, FT/FGA (Offensive Four Factors)|
 ||eFG%, TOV%, DRB%, FT/FGA (Defensive Four Factors)|
 
