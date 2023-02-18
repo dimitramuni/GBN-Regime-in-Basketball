@@ -27,28 +27,39 @@ quite differently in the playoffs than in the regular season, so the same model 
 # Data :
 Data courtesy of **Sports Reference LLC** under creative commons licence, [Basketball-Reference](https://www.basketball-reference.com/) -Basketball Statistics and History. 
 
-# Methodology:
-
-## Regime Identification
-![Regime ID](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/diagrams/Regime_Identification.png)
-
-## Structure Combination
-![Structure Combination](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/diagrams/Structural-Combination-Granular.png)
-
-# Discussion : 
-
-## Roster Continuity
 - 
- ![Roster Continuity Chicago](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/164d44504dd034ad62513b0086cfcd9feea95aeb/results/roster_continuity/chicago_roster_continuity.png)
- 
-## Gated bayesian Network for Chicago Bulls
- ![GBN](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/diagrams/GBN.png)
- 
+
 ## Trends in 3 Points Attempt with Time
  ![3PA](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/3PA_season.png)
  
 ## Heatmap for Chicago Bulls 
  ![Heatmap](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/chicago_heatmap.png)
+
+# Key Findings : 
+
+## SHAP Analysis 
+![SHAP analysis](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/shap/shap_analysis.png)
+
+- Here the feature that has the highest effect on Team_Prospect is WinsInLast15,
+i.e. the number of wins in the last fifteen games; this is unsurprising as the Team_Prospect
+takes into account the running mean of score difference for the last twenty games, so there is
+likely a higher correlation between these two events. 
+
+- We observed a similar result for another feature WinsInLast10, which accounts for several wins in the last ten games, albeit the feature importance is less than that of WinsInLast15.
+
+-The next three most important features are related to the player’s individual contribution. As described previously, the first category of the players are those who are going to continue playing in the next season; these players have a higher impact on the Team_Prospect than the contribution from the players who either have newly joined the team in the current season or the players from the current season who are going to be leaving the team in the
+next season.
+## Roster Continuity
+- Roster continuity measures the percentage of the current season roster made up of players from the previous season. In this figure, the roster continuity is plotted on the y-axis ranging between 0 to 1 (or 0% to 100%) along with the corresponding season on the x-axis. 
+- The season where a team only played in the regular season is marked with grey coloured bars, and when the team is advancing to other levels, such as playing in Conference 1st Round, Conference Semi-Final, Conference Final or Championship Final represented by green, blue, turquoise and red colours accordingly. We can visually observe
+that seasons, where Chicago Bulls had advanced to the Conference Semi-Final or above are described by blue, turquoise and red bars, which correspond to more than 50% roster continuity value (except for season 2010-11 for which roster continuity is 49%), which means that there is a significant correlation between roster stability of a team and team’s performance.
+- Now, if we consider the stability of the roster in terms of players who continue to play in the next season, this would translate into the player’s contribution towards win share.
+ ![Roster Continuity Chicago](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/164d44504dd034ad62513b0086cfcd9feea95aeb/results/roster_continuity/chicago_roster_continuity.png)
+ 
+## Gated bayesian Network for Chicago Bulls
+ ![GBN](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/diagrams/GBN.png)
+ 
+
 
 # References :
 1. Marcus Bendtsen. “Regimes in baseball players’ career data.” In: Data Mining Knowledge Discovery 31.6 (2016), pp. 1580–1621. ISSN:13845810.URL: https://link.springer.com/content/pdf/10.1007/s10618-017-0510-5.pdf.
