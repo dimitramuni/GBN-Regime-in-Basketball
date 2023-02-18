@@ -62,7 +62,16 @@ The dataset used in the experiment is composed of raw data and processed data as
 |ORB%| Offensive Rebound Percentage|
 |DRB%| Defensive Rebound Percentage|
 |FT/FGA| Free Throw per Free Goal Attempt|
-- Raw Data
+## Raw Data
+
+|Type of Features| Features|
+| ----------- | ----------- |
+||Tm, Opp, FG, FGA, FG%, 3P, 3PA, 3P%, FT, FTA,|
+|Regular BoxScore| FT%, ORB, DRB, TRB, AST, STL, BLK, TOV, PF|
+||Tm, Opp, ORtg, DRtg, Pace, FTr, 3PAr|
+||TS%, TRB%, AST%, STL%, BLK%|
+|Advanced BoxScore |eFG%, TOV%, ORB%, FT/FGA (Offensive Four Factors)|
+||eFG%, TOV%, DRB%, FT/FGA (Defensive Four Factors)|
 
 ## Trends in 3 Points Attempt with Time
  ![3PA](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/3PA_season.png)
