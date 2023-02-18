@@ -50,14 +50,31 @@ The dataset used in the experiment is composed of raw data and processed data as
 
 ## Raw Data
 
-|Type of Features| Features|
+|Regular Box Score| Advanced Box Score|
 |:---: |:---:|
-||Tm, Opp, FG, FGA, FG%, 3P, 3PA, 3P%, FT, FTA,|
-|Regular BoxScore| FT%, ORB, DRB, TRB, AST, STL, BLK, TOV, PF|
-||Tm, Opp, ORtg, DRtg, Pace, FTr, 3PAr|
-||TS%, TRB%, AST%, STL%, BLK%|
-|Advanced BoxScore |eFG%, TOV%, ORB%, FT/FGA (Offensive Four Factors)|
-||eFG%, TOV%, DRB%, FT/FGA (Defensive Four Factors)|
+|Tm, Opp, FG, FGA, FG%, 3P, 3PA, 3P%|Tm, Opp, ORtg, DRtg, Pace, FTr, 3PAr,TS%, TRB%, AST%, STL%, BLK%|
+|FT, FTA, FT%, ORB, DRB, TRB |eFG%, TOV%, ORB%, FT/FGA (Offensive Four Factors) |
+|AST, STL, BLK, TOV, PF|eFG%, TOV%, DRB%, FT/FGA (Defensive Four Factors)|
+
+## Processed Data
+
+
+|External Influences|Player’s Contribution|Team’s Overall Performance|
+|:---: |:---:|:---:|
+|Home_Game|Continuing_Players_WS|Team_Prospect|
+|Opponent_PlayOff| Incoming_Players_WS|WinsInLast15|
+|Days_Between_Games|Leaving_Players_WS| WinsInLast10|
+||WinsInLast5|
+
+
+
+
+
+
+
+
+
+
 
 ## Trends in 3 Points Attempt with Time
  ![3PA](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/3PA_season.png)
