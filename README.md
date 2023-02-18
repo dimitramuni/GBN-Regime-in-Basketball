@@ -66,9 +66,9 @@ The dataset used in the experiment is composed of raw data and processed data as
 
 |Type of Features| Features|
 | ----------- | ----------- |
-||Tm, Opp, FG, FGA, FG%, 3P, 3PA, 3P%, FT, FTA,|
+|Tm, Opp, FG, FGA, FG%, 3P, 3PA, 3P%, FT, FTA,|
 |Regular BoxScore| FT%, ORB, DRB, TRB, AST, STL, BLK, TOV, PF|
-||Tm, Opp, ORtg, DRtg, Pace, FTr, 3PAr|
+|Tm, Opp, ORtg, DRtg, Pace, FTr, 3PAr|
 ||TS%, TRB%, AST%, STL%, BLK%|
 |Advanced BoxScore |eFG%, TOV%, ORB%, FT/FGA (Offensive Four Factors)|
 ||eFG%, TOV%, DRB%, FT/FGA (Defensive Four Factors)|
