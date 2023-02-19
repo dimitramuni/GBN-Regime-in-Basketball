@@ -7,10 +7,7 @@ In the dynamic sport of professional basketball, a team may encounter several ta
 
 Keywords: probabilistic modelling, SHAP analysis, Shapley Values, Bayesian network, directed acyclic graphs, basketball analytics, gated Bayesian network, regime-based analysis, gaussian processes optimisation, hill climbing, NBA, Chicago Bulls
 
-# Problem Statement :
-The overall purpose of this Master Project is to explore the usage of the Gated Bayesian Network to evaluate the performance of a professional basketball team through history, which
-could provide important insight into a team’s playing dynamics for the coach and other team strategists. The on-court combating quality of a basketball team could be measured from
-many aspects. The apparent intention is to find out if we could use the gated-Bayesian network, which was used previously by [Bendtsen (2016)](https://link.springer.com/content/pdf/10.1007/s10618-017-0510-5.pdf) to assess the change of regimes of baseball players through their careers.
+
 
 ## Research Objectives :
 The following three research objectives are thoroughly addressed in this degree project work.
@@ -20,14 +17,12 @@ We list the research objectives as follows,
 3. Validate whether the aforementioned framework enhanced the understanding of a team’s dynamics using statistical measures and historical evidence.
 
 ## Scopes of this Project :
-The scope of this Master Project is bound to scrutinise the performance statistics of the NBA team Chicago Bulls between the seasons 1983-84 to 2020-21. Furthermore, in this analysis,
-each regular season, we consider that the individual team plays during 82 games, excluding the playoffs games. The reason for such a consideration is primarily because teams play
-quite differently in the playoffs than in the regular season, so the same model would not be an apt choice. Additionally, the non-commercial data is utilised in this project available on the basketball-reference website at gratis. Lastly, the model described in this discourse is insensitive to the alteration in the NBA regulations over the decades.
+- The scope of this Master Project is bound to scrutinise the performance statistics of the NBA team Chicago Bulls between the seasons 1983-84 to 2020-21. Furthermore, in this analysis, each regular season, we consider that the individual team plays during 82 games, excluding the playoffs games. The reason for such a consideration is primarily because teams play quite differently in the playoffs than in the regular season, so the same model would not be an apt choice.
+- Additionally, the non-commercial data is utilised in this project available on the basketball-reference website at gratis. Lastly, the model described in this discourse is insensitive to the alteration in the NBA regulations over the decades.
 
 
 # Data :
-Data courtesy of **Sports Reference LLC** under creative commons licence, [Basketball-Reference](https://www.basketball-reference.com/) -Basketball Statistics and History. 
-The dataset used in the experiment is composed of raw data and processed data as explained below:
+Data courtesy of **Sports Reference LLC** under creative commons licence, [Basketball-Reference](https://www.basketball-reference.com/) -Basketball Statistics and History. The dataset used in the experiment is composed of raw data and processed data as explained below:
 
 |Term|Description||Term|Description|
 |:---: |:---:|:---:|:---: |:---:|
@@ -70,27 +65,26 @@ The dataset used in the experiment is composed of raw data and processed data as
 
 
 ## Trends in 3 Points Attempt with Time
- ![3PA](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/3PA_season.png)
- 
 
+![3PA](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/3PA_season.png)
+-  The goal scored outside the 3-point line earns the team 3 points, which is denoted by 3P, and the number of 3-point attempts by the team is denoted by 3PA. Furthermore, the percentage of successful 3 points goals made out of all 3-point attempts is represented by 3P% or 3PPer.
 
-## Heatmap for Chicago Bulls 
- ![Heatmap](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/chicago_heatmap.png)
+- In the figure, we have visualised how the trends in 3 points attempts have changed with the season, as not all the seasons had the same number of matches, we have chosen to plot 3 point attempts per game for the each of the 38 seasons.
+
+- We also include points per game in each season for comparison. It is evident that although the number of 3-point attempts increased each season, the points per game in the seasons have fluctuated but have not seen an increasing trend. These points to changes in playing style over the years, where players choose to shoot 3-point goals, possibly because it is more attractive to the spectators.
+
 
 # Key Findings : 
 
 ## SHAP Analysis 
 ![SHAP analysis](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/shap/shap_analysis.png)
 
-- Here the feature that has the highest effect on Team_Prospect is WinsInLast15,
-i.e. the number of wins in the last fifteen games; this is unsurprising as the Team_Prospect
-takes into account the running mean of score difference for the last twenty games, so there is
-likely a higher correlation between these two events. 
+- Here the feature that has the highest effect on *Team_Prospect* is *WinsInLast15*, i.e. the number of wins in the last fifteen games; this is unsurprising as the *Team_Prospect* takes into account the running mean of score difference for the last twenty games, so there is likely a higher correlation between these two events. 
 
-- We observed a similar result for another feature WinsInLast10, which accounts for several wins in the last ten games, albeit the feature importance is less than that of WinsInLast15.
+- We observed a similar result for another feature *WinsInLast10*, which accounts for several wins in the last ten games, albeit the feature importance is less than that of *WinsInLast15*.
 
-- The next three most important features are related to the player’s individual contribution. As described previously, the first category of the players are those who are going to continue playing in the next season; these players have a higher impact on the Team_Prospect than the contribution from the players who either have newly joined the team in the current season or the players from the current season who are going to be leaving the team in the
-next season.
+- The next three most important features are related to the player’s individual contribution. As described previously, the first category of the players are those who are going to continue playing in the next season; these players have a higher impact on the Team_Prospect than the contribution from the players who either have newly joined the team in the current season or the players from the current season who are going to be leaving the team in the next season.
+
 ## Roster Continuity
 - *Roster Continuity* measures the percentage of the current season roster made up of players from the previous season. In this figure, the roster continuity is plotted on the y-axis ranging between 0 to 1 (or 0% to 100%) along with the corresponding season on the x-axis. 
 - The season where a team only played in the regular season is marked with grey coloured bars, and when the team is advancing to other levels, such as playing in Conference 1st Round, Conference Semi-Final, Conference Final or Championship Final represented by green, blue, turquoise and red colours accordingly. We can visually observe
@@ -100,7 +94,22 @@ that seasons, where Chicago Bulls had advanced to the Conference Semi-Final or a
  
 ## Gated bayesian Network for Chicago Bulls
  ![GBN](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/diagrams/GBN.png)
+- Chicago Bulls was a rather mediocre team in the early 1980s; from the season 1980-81 to the season 1983-84, they did not even qualify for the playoffs and the team was ranked 19th out of 232.
 
+- The first regime $R_1$ began in the season 1983-84, which brought several changes; the team had a new coach Kevin Loughery along with four rookies and only two playerswith experience of five years maximum. In the following season, the team had a new executive, Jerry Krause and a rookie Shooting Guard Michael Jordan; this made several long-lasting impacts on the franchise. Chicago Bulls started qualifying for the playoffs from 1984-85. The first
+regime started from the season 1983-844. We can observe that winning the previous games and the players’
+win share have an impact over the Team_Prospect; this has been consistent through all the regimes.
+
+- Chicago Bulls had hit their stride in the regime $R_2$, which started in season 1988-89 and lasted until season 1994-95. The distribution of Team_Prospect here has a left tail indicating their consistent domination on the court; the performance during this period was exemplary, which earned the Chicago Bulls their first threepeat (three consecutive wins)of NBA title. After the sudden departure of Michael Jordan from the team before season
+1993-94, Scottie Pippen helmed the leadership, but the team had a performance dip in two
+consecutive seasons in the absence of Michael Jordan.
+
+- The next regime $R_3$ Michael Jordan’s 2nd retirement coincided with this era, and multiple prominent players like Dennis Rodman and Scottie Pippen were traded-off to another team; this was a volatile time; the team hired several rookies from NCAA, Ed Curry and Tyson Chandler, and the team had one of the worst seasons in 2001 with 16 consecutive losses in the regular games, in the following years the franchise underwent several different
+coaches, it was only in the season 2004-05, the Chicago Bulls appeared in the play-off after six years.
+
+- Regime $R_4$ started in the season 2004-05 and lasted until the season 2017-18; this was the era of resurgence; three coaches who coached the team over the years, Scott Skiles (for four years), Tom Thibodeau (for five years) and Fred Hoiberg (for four years). This regime covered 13 seasons; Chicago Bulls had advanced to Playoffs in 11 seasons.
+
+- The last era is made of only three seasons;the home-game advantage is not evident in this regime. After the season 2016-17, Chicago Bulls did not appear in the playoffs in the following seasons.
 
 # Ethical Consideration
 
