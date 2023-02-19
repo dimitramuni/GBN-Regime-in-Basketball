@@ -93,22 +93,25 @@ that seasons, where Chicago Bulls had advanced to the Conference Semi-Final or a
  ![Roster Continuity Chicago](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/164d44504dd034ad62513b0086cfcd9feea95aeb/results/roster_continuity/chicago_roster_continuity.png)
  
 ## Gated bayesian Network for Chicago Bulls
+
  ![GBN](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/diagrams/GBN.png)
-- Chicago Bulls was a rather mediocre team in the early 1980s; from the season 1980-81 to the season 1983-84, they did not even qualify for the playoffs and the team was ranked 19th out of 232.
+- Chicago Bulls was a rather mediocre team in the early 1980s; from the season 1980-81 to the season 1983-84, they did not even qualify for the playoffs and the team was ranked 19th out of 23.
+![R1](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/Regime_Structure_Optimisation/R1.png)
 
 - The first regime $R_1$ began in the season 1983-84, which brought several changes; the team had a new coach Kevin Loughery along with four rookies and only two playerswith experience of five years maximum. In the following season, the team had a new executive, Jerry Krause and a rookie Shooting Guard Michael Jordan; this made several long-lasting impacts on the franchise. Chicago Bulls started qualifying for the playoffs from 1984-85. The first
 regime started from the season 1983-844. We can observe that winning the previous games and the players’
 win share have an impact over the Team_Prospect; this has been consistent through all the regimes.
+![R2](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/Regime_Structure_Optimisation/R2.png)
 
 - Chicago Bulls had hit their stride in the regime $R_2$, which started in season 1988-89 and lasted until season 1994-95. The distribution of Team_Prospect here has a left tail indicating their consistent domination on the court; the performance during this period was exemplary, which earned the Chicago Bulls their first threepeat (three consecutive wins)of NBA title. After the sudden departure of Michael Jordan from the team before season
 1993-94, Scottie Pippen helmed the leadership, but the team had a performance dip in two
 consecutive seasons in the absence of Michael Jordan.
-
+![R3](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/Regime_Structure_Optimisation/R3.png)
 - The next regime $R_3$ Michael Jordan’s 2nd retirement coincided with this era, and multiple prominent players like Dennis Rodman and Scottie Pippen were traded-off to another team; this was a volatile time; the team hired several rookies from NCAA, Ed Curry and Tyson Chandler, and the team had one of the worst seasons in 2001 with 16 consecutive losses in the regular games, in the following years the franchise underwent several different
 coaches, it was only in the season 2004-05, the Chicago Bulls appeared in the play-off after six years.
-
+![R4](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/Regime_Structure_Optimisation/R4.png)
 - Regime $R_4$ started in the season 2004-05 and lasted until the season 2017-18; this was the era of resurgence; three coaches who coached the team over the years, Scott Skiles (for four years), Tom Thibodeau (for five years) and Fred Hoiberg (for four years). This regime covered 13 seasons; Chicago Bulls had advanced to Playoffs in 11 seasons.
-
+![R5](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/Regime_Structure_Optimisation/R5.png)
 - The last era is made of only three seasons;the home-game advantage is not evident in this regime. After the season 2016-17, Chicago Bulls did not appear in the playoffs in the following seasons.
 
 # Ethical Consideration
