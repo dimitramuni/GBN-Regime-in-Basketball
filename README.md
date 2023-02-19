@@ -48,7 +48,8 @@ Data courtesy of **Sports Reference LLC** under creative commons licence, [Baske
 
 |Regular Box Score| Advanced Box Score|
 |:---: |:---:|
-|Tm, Opp, FG, FGA, FG%, 3P, 3PA, 3P%|Tm, Opp, ORtg, DRtg, Pace, FTr, 3PAr,TS%, TRB%, AST%, STL%, BLK%|
+|Tm, Opp, FG, FGA|Tm, Opp, ORtg, DRtg, Pace, FTr|
+|FG%, 3P, 3PA, 3P%| 3PAr,TS%, TRB%, AST%, STL%, BLK%|
 |FT, FTA, FT%, ORB, DRB, TRB |eFG%, TOV%, ORB%, FT/FGA (Offensive Four Factors) |
 |AST, STL, BLK, TOV, PF|eFG%, TOV%, DRB%, FT/FGA (Defensive Four Factors)|
 
@@ -59,9 +60,17 @@ Data courtesy of **Sports Reference LLC** under creative commons licence, [Baske
 |:---:|:---:|:---:|
 |Home_Game|Continuing_Players_WS|Team_Prospect|
 |Opponent_PlayOff| Incoming_Players_WS|WinsInLast15|
-|Days_Between_Games|Leaving_Players_WS| WinsInLast10|
+|Days_Between_Games|Leaving_Players_WS|WinsInLast10|
 |||WinsInLast5|
 
+### *Team_Prospect*
+
+Team_Prospect is calculated using the running mean of score difference in a game as follows,
+$$\delta_{t}^{20}=\mu_{t}^{20}(Tm)-\mu_{t}^{20}(Opp) $$
+
+- $\delta_{t}^{20}$ denotes the running mean of the opponent’s score considering twenty values up to time point t.
+
+# Key Findings : 
 
 
 ## Trends in 3 Points Attempt with Time
@@ -72,9 +81,6 @@ Data courtesy of **Sports Reference LLC** under creative commons licence, [Baske
 - In the figure, we have visualised how the trends in 3 points attempts have changed with the season, as not all the seasons had the same number of matches, we have chosen to plot 3 point attempts per game for the each of the 38 seasons.
 
 - We also include points per game in each season for comparison. It is evident that although the number of 3-point attempts increased each season, the points per game in the seasons have fluctuated but have not seen an increasing trend. These points to changes in playing style over the years, where players choose to shoot 3-point goals, possibly because it is more attractive to the spectators.
-
-
-# Key Findings : 
 
 ## SHAP Analysis 
 ![SHAP analysis](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/shap/shap_analysis.png)
@@ -99,7 +105,7 @@ that seasons, where Chicago Bulls had advanced to the Conference Semi-Final or a
 ![R1](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/Regime_Structure_Optimisation/R1.png)
 
 - The first regime $R_1$ began in the season 1983-84, which brought several changes; the team had a new coach Kevin Loughery along with four rookies and only two playerswith experience of five years maximum. In the following season, the team had a new executive, Jerry Krause and a rookie Shooting Guard Michael Jordan; this made several long-lasting impacts on the franchise. Chicago Bulls started qualifying for the playoffs from 1984-85. The first
-regime started from the season 1983-844. We can observe that winning the previous games and the players’
+regime started from the season 1983-84. We can observe that winning the previous games and the players’
 win share have an impact over the Team_Prospect; this has been consistent through all the regimes.
 ![R2](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/Regime_Structure_Optimisation/R2.png)
 
