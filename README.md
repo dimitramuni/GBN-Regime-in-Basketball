@@ -24,6 +24,7 @@ Data courtesy of **Sports Reference LLC** under creative commons licence, [Baske
 
 |Term|Description||Term|Description|
 |:---: |:---:|:---:|:---: |:---:|
+|Tm|Team Score||Opp|Opponent Score|
 |FG|Field Goal||PF|Personal Fouls|
 |FGA|Field Goal Attempts||ORtg|Offensive Ratings|
 |FG%|Field Goal Percentage||DRtg|Defensive Ratings|
