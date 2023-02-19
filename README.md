@@ -64,7 +64,7 @@ Data courtesy of **Sports Reference LLC** under creative commons licence, [Baske
 
 ### *Team_Prospect*
 
-Team_Prospect is calculated using the running mean of score difference in a game as follows,
+*Team_Prospect* is calculated using the running mean of score difference in a game as follows,
 $$\delta_{t}^{20}=\mu_{t}^{20}(Tm)-\mu_{t}^{20}(Opp) $$
 
 - $\delta_{t}^{20}$ denotes the running mean of the opponent’s score considering twenty values up to time point t.
@@ -88,7 +88,7 @@ $$\delta_{t}^{20}=\mu_{t}^{20}(Tm)-\mu_{t}^{20}(Opp) $$
 
 - We observed a similar result for another feature *WinsInLast10*, which accounts for several wins in the last ten games, albeit the feature importance is less than that of *WinsInLast15*.
 
-- The next three most important features are related to the player’s individual contribution. As described previously, the first category of the players are those who are going to continue playing in the next season; these players have a higher impact on the Team_Prospect than the contribution from the players who either have newly joined the team in the current season or the players from the current season who are going to be leaving the team in the next season.
+- The next three most important features are related to the player’s individual contribution. As described previously, the first category of the players are those who are going to continue playing in the next season; these players have a higher impact on the *Team_Prospect* than the contribution from the players who either have newly joined the team in the current season or the players from the current season who are going to be leaving the team in the next season.
 
 ## Roster Continuity
 - *Roster Continuity* measures the percentage of the current season roster made up of players from the previous season. In this figure, the roster continuity is plotted on the y-axis ranging between 0 to 1 (or 0% to 100%) along with the corresponding season on the x-axis. 
@@ -105,10 +105,10 @@ that seasons, where Chicago Bulls had advanced to the Conference Semi-Final or a
 
 - The first regime $R_1$ began in the season 1983-84, which brought several changes; the team had a new coach Kevin Loughery along with four rookies and only two players with experience of five years maximum. In the following season, the team had a new executive, Jerry Krause and a rookie Shooting Guard Michael Jordan; this made several long-lasting impacts on the franchise. Chicago Bulls started qualifying for the playoffs from 1984-85. The first
 regime started from the season 1983-84. We can observe that winning the previous games and the players’
-win share have an impact over the Team_Prospect; this has been consistent through all the regimes.
+win share have an impact over the *Team_Prospect*; this has been consistent through all the regimes.
 ![R2](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/Regime_Structure_Optimisation/R2.png)
 
-- Chicago Bulls had hit their stride in the regime $R_2$, which started in season 1988-89 and lasted until season 1994-95. The distribution of Team_Prospect here has a left tail indicating their consistent domination on the court; the performance during this period was exemplary, which earned the Chicago Bulls their first *threepeat* (three consecutive wins)of NBA title. After the sudden departure of Michael Jordan from the team before season
+- Chicago Bulls had hit their stride in the regime $R_2$, which started in season 1988-89 and lasted until season 1994-95. The distribution of *Team_Prospect* here has a left tail indicating their consistent domination on the court; the performance during this period was exemplary, which earned the Chicago Bulls their first *threepeat* (three consecutive wins)of NBA title. After the sudden departure of Michael Jordan from the team before season
 1993-94, Scottie Pippen helmed the leadership, but the team had a performance dip in two
 consecutive seasons in the absence of Michael Jordan.
 ![R3](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/Regime_Structure_Optimisation/R3.png)
