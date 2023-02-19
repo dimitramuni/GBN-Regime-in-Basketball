@@ -76,7 +76,7 @@ $$\delta_{t}^{20}=\mu_{t}^{20}(Tm)-\mu_{t}^{20}(Opp) $$
 ## Trends in 3 Points Attempt with Time
 
 ![3PA](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/misc/3PA_season.png)
--  The goal scored outside the 3-point line earns the team 3 points, which is denoted by 3P, and the number of 3-point attempts by the team is denoted by 3PA. Furthermore, the percentage of successful 3 points goals made out of all 3-point attempts is represented by 3P% or 3PPer.
+-  The goal scored outside the 3-point line earns the team 3 points, which is denoted by *3P*, and the number of 3-point attempts by the team is denoted by *3PA*. Furthermore, the percentage of successful 3 points goals made out of all 3-point attempts is represented by *3P%* or *3PPer*.
 
 - In the figure, we have visualised how the trends in 3 points attempts have changed with the season, as not all the seasons had the same number of matches, we have chosen to plot 3 point attempts per game for the each of the 38 seasons.
 
@@ -98,18 +98,18 @@ that seasons, where Chicago Bulls had advanced to the Conference Semi-Final or a
 - Now, if we consider the stability of the roster in terms of players who continue to play in the next season, this would translate into the player’s contribution towards win share.
  ![Roster Continuity Chicago](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/164d44504dd034ad62513b0086cfcd9feea95aeb/results/roster_continuity/chicago_roster_continuity.png)
  
-## Gated bayesian Network for Chicago Bulls
+## Gated Bayesian Network for Chicago Bulls
 
  ![GBN](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/diagrams/GBN.png)
 - Chicago Bulls was a rather mediocre team in the early 1980s; from the season 1980-81 to the season 1983-84, they did not even qualify for the playoffs and the team was ranked 19th out of 23.
 ![R1](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/Regime_Structure_Optimisation/R1.png)
 
-- The first regime $R_1$ began in the season 1983-84, which brought several changes; the team had a new coach Kevin Loughery along with four rookies and only two playerswith experience of five years maximum. In the following season, the team had a new executive, Jerry Krause and a rookie Shooting Guard Michael Jordan; this made several long-lasting impacts on the franchise. Chicago Bulls started qualifying for the playoffs from 1984-85. The first
+- The first regime $R_1$ began in the season 1983-84, which brought several changes; the team had a new coach Kevin Loughery along with four rookies and only two players with experience of five years maximum. In the following season, the team had a new executive, Jerry Krause and a rookie Shooting Guard Michael Jordan; this made several long-lasting impacts on the franchise. Chicago Bulls started qualifying for the playoffs from 1984-85. The first
 regime started from the season 1983-84. We can observe that winning the previous games and the players’
 win share have an impact over the Team_Prospect; this has been consistent through all the regimes.
 ![R2](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/Regime_Structure_Optimisation/R2.png)
 
-- Chicago Bulls had hit their stride in the regime $R_2$, which started in season 1988-89 and lasted until season 1994-95. The distribution of Team_Prospect here has a left tail indicating their consistent domination on the court; the performance during this period was exemplary, which earned the Chicago Bulls their first threepeat (three consecutive wins)of NBA title. After the sudden departure of Michael Jordan from the team before season
+- Chicago Bulls had hit their stride in the regime $R_2$, which started in season 1988-89 and lasted until season 1994-95. The distribution of Team_Prospect here has a left tail indicating their consistent domination on the court; the performance during this period was exemplary, which earned the Chicago Bulls their first *threepeat* (three consecutive wins)of NBA title. After the sudden departure of Michael Jordan from the team before season
 1993-94, Scottie Pippen helmed the leadership, but the team had a performance dip in two
 consecutive seasons in the absence of Michael Jordan.
 ![R3](https://github.com/dimitramuni/GBN-Regime-in-Basketball/blob/main/results/Regime_Structure_Optimisation/R3.png)
